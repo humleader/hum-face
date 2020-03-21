@@ -1,0 +1,15 @@
+.idea
+.DS_Store
+.vscode
+*.log
+coverage
+node_modules
+.happypack
+*.rej
+client/dll
+uploads
+build
+views
+backup
+config/development.app.yaml
+config/production.app.yaml

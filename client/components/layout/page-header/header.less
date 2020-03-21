@@ -1,0 +1,110 @@
+@import "~antd/lib/style/themes/default.less";
+
+.hum-header {
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  flex-shrink: 0;
+
+  & > .ant-menu {
+    flex: 1;
+  }
+
+  .headerinfo {
+    margin: 0 24px;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+
+    .userinfo {
+      margin-left: 12px;
+      display: flex;
+      align-items: center;
+      .userimg {
+          background: #fff;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          line-height: 28px;
+          color: #444;
+          border: 1px solid #EDEDED;
+      }
+      .name {
+          display: flex;
+          flex-direction: column;
+          margin-left: 12px;
+      }
+      p {
+        color: #A7A7A7;;
+        font-size: 10px;
+        margin-bottom: 0px;
+      }
+      .companyname {
+        color: #000;
+        font-size: 12px;
+      }
+    }
+
+    .logout {
+      .anticon {
+        margin-right: 8px;
+      }
+      color: #000;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.hum-layout-responsive .hum-header {
+  .userinfo {
+    margin-right: 0;
+    flex: 1;
+    text-align: right;
+  }
+
+  .anticon-bars {
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    line-height: @layout-header-height;
+    padding-left: 24px;
+    padding-right: 12px;
+    margin-right: 12px;
+    order: 1;
+  }
+
+  .logout {
+    display: none;
+  }
+}
+
+.hum-layout-header {
+  .hum-header {
+    margin-left: 200px;
+  }
+
+  &.hum-layout-responsive {
+    .hum-header {
+      margin-left: 80px;
+    }
+  }
+}
+
+.ant-popover.popover-menu {
+  .ant-popover-arrow {
+    background-color: @layout-header-background;;
+  }
+  .ant-popover-inner-content .ant-menu {
+    margin: -12px -18px;
+    & > .ant-menu-item:first-child {
+      margin-top: 0;
+    }
+
+    // XXX: antd 宽度计算 bug，导致箭头和菜单重叠，暂时先隐藏
+    .ant-menu-submenu-arrow {
+      display: none;
+    }
+  }
+}

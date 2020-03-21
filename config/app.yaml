@@ -1,0 +1,33 @@
+# 应用标识
+appCode: hum-face
+
+# 系统的标题
+pageTitle: 脸-用户管理平台
+
+# 主题
+theme: antd/diy
+
+# api前缀
+apiPrefix: /api
+
+# 基础路径
+baseURI: "/face"
+
+server:
+  port: 8080
+  devPort : 9005
+  debugPort: 7005
+
+dbOption:
+  host: 'localhost'
+  port: '3306'
+  user: 'root'
+  password: '***'
+  database: '***'
+  connectionLimit: 20
+
+redis:
+  host: 'localhost'
+  port: '6379'
+  password: '***'
+

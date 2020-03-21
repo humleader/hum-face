@@ -1,0 +1,36 @@
+{
+  "presets": [
+    [
+      "env",
+      {
+        "modules": false
+      }
+    ],
+    [
+      "react"
+    ]
+  ],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true,
+        "libraryDirectory": "es"
+      }
+    ],
+    "syntax-dynamic-import",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-object-rest-spread"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
+    }
+  },
+  "sourceMaps": true,
+  "retainLines": true
+}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ pageTitle }}</title>
+  <link rel="icon" href="//www.humleader.com/icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/javascript">
+    window.__INITIAL_STATE__ = {{ initState | safe }}
+    window.__config__ = {{ config | safe }}
+  </script>
+</body>
+
+</html>

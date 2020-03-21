@@ -1,0 +1,29 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "eslint:recommended",
+    "standard",
+    "standard-react",
+    "prettier"
+  ],
+  "env": {
+    "jest": true,
+    "browser": true,
+    "jasmine": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "comma-dangle": "off",
+    "no-console": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 100,
+        "semi": false,
+        "singleQuote": true
+      }
+    ]
+  }
+}

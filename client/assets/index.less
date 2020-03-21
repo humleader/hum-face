@@ -1,0 +1,54 @@
+// 全局样式
+@import "~nprogress/nprogress.css";
+@import "~antd/lib/style/themes/default.less";
+
+// 覆盖 antd 样式
+.ant-form {
+  overflow: hidden;
+
+  .ant-input-group-addon {
+    background-color: #fff;
+  }
+}
+
+.ant-table-tbody {
+  background-color: #fff;
+
+  .ant-table-row:nth-child(2n + 2) {
+    background-color: #fcfcfc;
+  }
+}
+
+// 进度条
+#nprogress {
+  div.spinner {
+    top: @layout-header-height + 16px;
+  }
+}
+
+.m-toolbar {
+  margin-top: -16px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
+}
+
+.m-content {
+  padding-bottom: 16px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+// 分组
+.actions {
+  .ant-btn + .ant-btn {
+    margin-left: 8px;
+  }
+
+  a + a::before {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    content: "|";
+    color: #ececec;
+  }
+}

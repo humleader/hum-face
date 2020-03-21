@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{pageTitle}}</title>
+  <link rel="icon" href="{{ baseURI }}/favicon.ico" />
+  <style>
+    body {
+      background-color: #f0f2f5;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      width: 1000px;
+      padding-top: 200px;
+      margin: 0 auto;
+    }
+
+    .error-image-container {
+      width: 450px;
+      padding: 50px 100px 50px 0;
+    }
+
+    .error-image {
+      width: 100%;
+    }
+
+    .error-content-container {
+      width: 450px;
+    }
+
+    .error-code {
+      color: #434e59;
+      font-size: 72px;
+      font-weight: 600;
+      line-height: 72px;
+      margin: 0 0 24px;
+    }
+
+    .error-desc {
+      color: rgba(0, 0, 0, .45);
+      font-size: 20px;
+      line-height: 28px;
+      margin-bottom: 16px;
+      white-space: pre-wrap;
+    }
+
+    .actions button {
+      font-size: 14px;
+      color: #fff;
+      background-color: #1890ff;
+      border-color: #1890ff;
+      line-height: 32px;
+      cursor: pointer;
+      padding: 0 15px;
+      border-radius: 4px;
+    }
+
+    .actions button:hover {
+      color: #fff;
+      background-color: #40a9ff;
+      border-color: #40a9ff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="error-image-container">
+      <img class="error-image" />
+    </div>
+    <div class="error-content-container">
+      <h1 class="error-code">{{ code }}</h1>
+      <div class="error-desc">{{ error }}</div>
+
+      <div class="actions">
+        <a href="{{ baseURI | default('/', true) }}">
+          <button>回首页</button>
+        </a>
+        <a href="{{ baseURI }}/logout">
+          <button>重新登录</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
