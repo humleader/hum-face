@@ -77,7 +77,7 @@ instance.interceptors.response.use(
         // token过期
         if (data.code === 1021) {
           localStorage.setItem('_h_token', '')
-          window.location = '/hum/login'
+          window.location = '/face/login'
           return
         }
       }

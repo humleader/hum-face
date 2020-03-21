@@ -20,7 +20,7 @@ const isDllExist = fs.existsSync(dllPath)
 const config = {
   mode: 'development',
   entry: {
-    app: './app',
+    // app: './app',
     login: './login'
   },
   devtool: 'cheap-module-source-map',
@@ -39,13 +39,13 @@ const config = {
     // new BundleAnalyzerPlugin(),
 
     new webpack.HotModuleReplacementPlugin(),
-    // new webpack.NamedModulesPlugin(), // 在热加载时直接返回更新文件名，而不是文件的id。
+    new webpack.NamedModulesPlugin(), // 在热加载时直接返回更新文件名，而不是文件的id。
 
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'public/index.html',
-      chunks: ['app']
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: 'index.html',
+    //   template: 'public/index.html',
+    //   chunks: ['app']
+    // }),
 
     new HtmlWebpackPlugin({
       filename: 'login.html',
@@ -59,8 +59,7 @@ const config = {
             manifest: require(dllPath)
           }),
           new AddAssetHtmlPlugin({
-            filepath: require.resolve('../client/dll/vendor.dll.js'),
-            includeSourcemap: false
+            filepath: require.resolve('../client/dll/vendor.dll.js')
           })
         ]
       : [])

@@ -16,9 +16,7 @@ const Loading = ({ error }) => {
           marginTop: '10%'
         }}
       >
-        <div style={{ width: 450 }}>
-          <img src={require('../../assets/error.png')} />
-        </div>
+        <div style={{ width: 450 }} />
         <div style={{ color: '#434e59', fontSize: 50, fontWeight: 700 }}>页面咔嚓了:(</div>
       </div>
     )

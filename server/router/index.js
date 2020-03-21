@@ -1,9 +1,8 @@
 const Router = require('koa-router')
 
-const { apiPrefix } = require('utils/config')
+const { apiPrefix, baseURI } = require('utils/config')
 
 const home = require('controllers/home')
-const login = require('controllers/login')
 const customRouter = require('./router')
 
 const router = new Router()
@@ -11,7 +10,7 @@ const router = new Router()
 // 首页
 router
   .get('/', home)
-  .get('/hum/login', login)
+  .get(`${baseURI}/login`, home)
   // 路由定义
   .use(customRouter.routes())
   // 自动代理到 java 和 首页渲染

@@ -3,7 +3,7 @@ const User = require('daos/user')
 const jwt = require('jsonwebtoken')
 const secret = require('utils/secret.json')
 const expireDate = day => {
-  let date = new Date()
+  const date = new Date()
   date.setTime(date.getTime() + day * 86400000)
   return date
 }

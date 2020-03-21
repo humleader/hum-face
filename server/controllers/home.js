@@ -5,7 +5,6 @@ const {
   pageTitle,
   version,
   layout,
-  cas,
   smallScreen
 } = require('utils/config')
 // 获取用户列表
@@ -16,7 +15,7 @@ module.exports = async ctx => {
   const initState = getInitState()
   const config = await getConfig(ctx)
 
-  await render(ctx)('index', {
+  await render(ctx)('login', {
     pageTitle,
     config: JSON.stringify(config),
     initState: JSON.stringify(initState),
@@ -32,15 +31,8 @@ function getInitState() {
 // 获取全局配置
 async function getConfig(ctx) {
   let userInfo = {}
-  if (cas.enable) {
-    userInfo = {
-      nickname: ctx.session.userName,
-      nicknameCn: ctx.session.userNameCN || ctx.session.userName
-    }
-  } else {
-    userInfo = {
-      ...ctx.user
-    }
+  userInfo = {
+    ...ctx.user
   }
 
   return {
@@ -50,7 +42,6 @@ async function getConfig(ctx) {
     apiPrefix,
     // 系统编号
     appCode,
-    cas,
     // 用户信息
     userInfo,
     env,

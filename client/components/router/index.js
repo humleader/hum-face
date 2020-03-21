@@ -11,6 +11,7 @@ export default class CoreRouter extends React.PureComponent {
       <Auth key={page} component={lazyloader(() => import(`pages/${page}`))} path={`/${page}`} />
     ))
   }
+
   render() {
     return (
       <Switch>

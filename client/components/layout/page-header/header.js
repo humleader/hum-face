@@ -13,9 +13,8 @@ class Header extends Component {
   }
 
   componentDidMount() {
-    const { getUserList, queryRegions } = this.props.action
+    const { getUserList } = this.props.action
     getUserList()
-    queryRegions()
   }
 
   logout(e) {
@@ -57,8 +56,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     action: {
-      ...dispatch.user,
-      queryRegions: dispatch.common.queryRegions
+      ...dispatch.user
     }
   }
 }

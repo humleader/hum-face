@@ -6,14 +6,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, Route, Switch, Redirect } from 'react-router-dom'
-import { LocaleProvider } from 'antd'
+import { ConfigProvider } from 'antd'
 import { init } from '@rematch/core'
-import zhCN from 'antd/lib/locale-provider/zh_CN'
+import zhCN from 'antd/es/locale/zh_CN'
 
 import history from './common/history'
 import { models } from './store'
 // 登录页面不需要layout布局故放在这个路由展示
-import Login from 'pages/user/page/login'
+import Login from 'pages/user/page'
 
 const store = init({
   models
@@ -21,7 +21,7 @@ const store = init({
 
 ReactDOM.render(
   [
-    <LocaleProvider key="provider" locale={zhCN}>
+    <ConfigProvider key="provider" locale={zhCN}>
       <Provider store={store}>
         <Router history={history}>
           <Switch>
@@ -30,7 +30,7 @@ ReactDOM.render(
           </Switch>
         </Router>
       </Provider>
-    </LocaleProvider>
+    </ConfigProvider>
   ],
   document.getElementById('root')
 )
