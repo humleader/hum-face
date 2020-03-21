@@ -39,11 +39,11 @@ const server = new WebpackDevServer(compiler, {
   quiet: true, // webpack 的错误或警告在控制台不可见
   noInfo: true,
   hot: true, // 模块热替换
-  // compress: true, // 一切服务都启用 gzip 压缩
-  // disableHostCheck: true,
+  compress: true, // 一切服务都启用 gzip 压缩
+  disableHostCheck: true,
   publicPath: publicPath,
   watchOptions: {
-    aggregateTimeout: 500
+    aggregateTimeout: 300
   },
   // host: devIp,
   // open: true,

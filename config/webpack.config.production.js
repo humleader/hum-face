@@ -24,15 +24,7 @@ const publicPath = `/${appName}/static/`
 const config = {
   mode: 'production',
   entry: {
-    vendor: [
-      'react',
-      'lodash',
-      'react-router',
-      'react-router-dom',
-      'react-dom',
-      'immutable',
-      'moment'
-    ],
+    vendor: ['react', 'lodash', 'react-router-dom', 'react-dom', 'immutable', 'moment'],
     app: './app',
     login: './login'
   },

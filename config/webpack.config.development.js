@@ -23,12 +23,15 @@ const config = {
     // app: './app',
     login: './login'
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval-source-map',
   output: {
     pathinfo: true,
     path: buildPath,
     filename: '[name].js',
     chunkFilename: '[name].js'
+  },
+  optimization: {
+    minimize: false
   },
   plugins: [
     new MiniCssExtractPlugin({

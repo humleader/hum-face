@@ -13,7 +13,6 @@ module.exports = {
     vendor: [
       'react',
       'lodash',
-      'react-router',
       'react-router-dom',
       'react-dom',
       'immutable',
