@@ -27,7 +27,23 @@ const config = {
     pathinfo: true,
     path: buildPath,
     filename: '[name].js',
+    publicPath: '/',
     chunkFilename: '[name].js'
+  },
+  devServer: {
+    hot: true, // 模块热替换
+    compress: true, // 一切服务都启用 gzip 压缩
+    disableHostCheck: true,
+    port: 9001,
+    historyApiFallback: {
+      rewrites: [
+        {
+          from: /!^\/api/g,
+          to: '/'
+        }
+      ]
+    },
+    inline: true
   },
   optimization: {
     minimize: false
@@ -45,8 +61,8 @@ const config = {
     // }),
 
     new HtmlWebpackPlugin({
-      filename: 'login.html',
-      template: 'public/login.html',
+      filename: 'index.html',
+      template: 'public/index.html',
       chunks: ['login']
     }),
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter as Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import List from 'pages/user/page'
 

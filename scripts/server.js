@@ -12,9 +12,11 @@ const WebpackDevServer = require('webpack-dev-server')
 
 Promise.promisifyAll(fs)
 
-const env = process.env.NODE_ENV || 'development'
+// const devIp = ip()[0]
 
-const devIp = 'localhost'
+const env = process.env.NODE_ENV || 'development'
+const devIp = '127.0.0.1'
+
 const root = path.join(__dirname, '..')
 const viewsPath = path.join(root, 'server/views')
 const configPath = path.join(root, `config/webpack.config.${env}`)
@@ -42,11 +44,7 @@ const server = new WebpackDevServer(compiler, {
   compress: true, // 一切服务都启用 gzip 压缩
   disableHostCheck: true,
   publicPath: publicPath,
-  watchOptions: {
-    aggregateTimeout: 300
-  },
-  // host: devIp,
-  // open: true,
+  inline: true,
 
   // 请求重定向：
   // http://${devIp}:${devPort}/build/* =>
