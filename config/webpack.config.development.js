@@ -24,7 +24,6 @@ const config = {
   },
   devtool: 'cheap-module-source-map',
   output: {
-    pathinfo: true,
     path: buildPath,
     filename: '[name].js',
     chunkFilename: '[name].js'
