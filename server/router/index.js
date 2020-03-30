@@ -24,6 +24,16 @@ router
     }
 
     // 自动代理
+    if (path.startsWith('/sockjs-node') && path !== apiPrefix) {
+      ctx.body = {
+        code: 0,
+        data: ''
+      }
+      return
+      // await proxy(ctx, next)
+    }
+
+    // 自动代理
     if (apiPrefix && path.startsWith(apiPrefix) && path !== apiPrefix) {
       // await proxy(ctx, next)
     } else {
