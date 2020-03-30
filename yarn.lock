@@ -5160,20 +5160,20 @@ helmet-crossdomain@0.4.0:
   resolved "https://registry.npm.taobao.org/helmet-crossdomain/download/helmet-crossdomain-0.4.0.tgz#5f1fe5a836d0325f1da0a78eaa5fd8429078894e"
   integrity sha1-Xx/lqDbQMl8doKeOql/YQpB4iU4=
 
-helmet-csp@2.9.5:
-  version "2.9.5"
-  resolved "https://registry.npm.taobao.org/helmet-csp/download/helmet-csp-2.9.5.tgz#ea1ebec6d481e8f9aa5f48cc4ca2714e031f627d"
-  integrity sha1-6h6+xtSB6PmqX0jMTKJxTgMfYn0=
+helmet-csp@2.10.0:
+  version "2.10.0"
+  resolved "https://registry.npm.taobao.org/helmet-csp/download/helmet-csp-2.10.0.tgz#685dde1747bc16c5e28ad9d91e229a69f0a85e84"
+  integrity sha1-aF3eF0e8FsXiitnZHiKaafCoXoQ=
   dependencies:
     bowser "2.9.0"
     camelize "1.0.0"
     content-security-policy-builder "2.1.0"
     dasherize "2.0.0"
 
-helmet@^3.15.1:
-  version "3.21.3"
-  resolved "https://registry.npm.taobao.org/helmet/download/helmet-3.21.3.tgz#15777aae82a4d2678c104fd18195a4012f429b67"
-  integrity sha1-FXd6roKk0meMEE/RgZWkAS9Cm2c=
+helmet@^3.21.1:
+  version "3.22.0"
+  resolved "https://registry.npm.taobao.org/helmet/download/helmet-3.22.0.tgz#3a6f11d931799145f0aff15dbc563cff9e13131f"
+  integrity sha1-Om8R2TF5kUXwr/FdvFY8/54TEx8=
   dependencies:
     depd "2.0.0"
     dns-prefetch-control "0.2.0"
@@ -5182,7 +5182,7 @@ helmet@^3.15.1:
     feature-policy "0.3.0"
     frameguard "3.1.0"
     helmet-crossdomain "0.4.0"
-    helmet-csp "2.9.5"
+    helmet-csp "2.10.0"
     hide-powered-by "1.1.0"
     hpkp "2.0.0"
     hsts "2.2.0"
@@ -5400,7 +5400,7 @@ http-errors@1.7.2:
     statuses ">= 1.5.0 < 2"
     toidentifier "1.0.0"
 
-http-errors@1.7.3, http-errors@^1.3.1, http-errors@^1.6.3, http-errors@~1.7.2:
+http-errors@1.7.3, http-errors@^1.6.3, http-errors@^1.7.3, http-errors@~1.7.2:
   version "1.7.3"
   resolved "https://registry.npm.taobao.org/http-errors/download/http-errors-1.7.3.tgz#6c619e4f9c60308c38519498c14fbb10aacebb06"
   integrity sha1-bGGeT5xgMIw4UZSYwU+7EKrOuwY=
@@ -6529,7 +6529,7 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   resolved "https://registry.npm.taobao.org/js-tokens/download/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
   integrity sha1-GSA/tZmR35jjoocFDUZHzerzJJk=
 
-js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.4.2, js-yaml@^3.4.3, js-yaml@^3.6.1, js-yaml@^3.7.0:
+js-yaml@^3.13.0, js-yaml@^3.13.1, js-yaml@^3.4.2, js-yaml@^3.4.3, js-yaml@^3.7.0:
   version "3.13.1"
   resolved "https://registry.npm.taobao.org/js-yaml/download/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
   integrity sha1-r/FRswv9+o5J4F2iLnQV6d+jeEc=
@@ -6660,7 +6660,7 @@ jsonify@~0.0.0:
   resolved "https://registry.npm.taobao.org/jsonify/download/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
   integrity sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=
 
-jsonwebtoken@8.5.1, jsonwebtoken@^8.3.0:
+jsonwebtoken@8.5.1, jsonwebtoken@^8.5.1:
   version "8.5.1"
   resolved "https://registry.npm.taobao.org/jsonwebtoken/download/jsonwebtoken-8.5.1.tgz#00e71e0b8df54c2121a1f26137df2280673bcc0d"
   integrity sha1-AOceC431TCEhofJhN98igGc7zA0=
@@ -6761,7 +6761,7 @@ klaw@^1.0.0:
   optionalDependencies:
     graceful-fs "^4.1.9"
 
-koa-body@^4.0.4:
+koa-body@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npm.taobao.org/koa-body/download/koa-body-4.1.1.tgz#50686d290891fc6f1acb986cf7cfcd605f855ef0"
   integrity sha1-UGhtKQiR/G8ay5hs98/NYF+FXvA=
@@ -6801,14 +6801,14 @@ koa-generic-session@^2.0.4:
     parseurl "~1.3.1"
     uid-safe "~2.1.4"
 
-koa-helmet@^4.2.0:
-  version "4.2.1"
-  resolved "https://registry.npm.taobao.org/koa-helmet/download/koa-helmet-4.2.1.tgz#6f6598aa1dbde501c5f7e92b80a5358690cc13d8"
-  integrity sha1-b2WYqh295QHF9+krgKU1hpDME9g=
+koa-helmet@^5.2.0:
+  version "5.2.0"
+  resolved "https://registry.npm.taobao.org/koa-helmet/download/koa-helmet-5.2.0.tgz#6529f64dd4539261a9bb0a56e201e4976f0200f0"
+  integrity sha1-ZSn2TdRTkmGpuwpW4gHkl28CAPA=
   dependencies:
-    helmet "^3.15.1"
+    helmet "^3.21.1"
 
-koa-jwt@^3.5.1:
+koa-jwt@^3.6.0:
   version "3.6.0"
   resolved "https://registry.npm.taobao.org/koa-jwt/download/koa-jwt-3.6.0.tgz#b54537c67cd9016f02d54b9fd79f3b256c25aab4"
   integrity sha1-tUU3xnzZAW8C1Uuf1587JWwlqrQ=
@@ -6817,7 +6817,7 @@ koa-jwt@^3.5.1:
     koa-unless "1.0.7"
     p-any "1.1.0"
 
-koa-nunjucks-2@^3.0.0:
+koa-nunjucks-2@^3.0.2:
   version "3.0.2"
   resolved "https://registry.npm.taobao.org/koa-nunjucks-2/download/koa-nunjucks-2-3.0.2.tgz#78b15a64a54d9234ae82cccf4a1bdbb966730208"
   integrity sha1-eLFaZKVNkjSugszPShvbuWZzAgg=
@@ -6839,17 +6839,17 @@ koa-redis@^4.0.1:
     debug "^4.1.1"
     ioredis "^4.14.1"
 
-koa-router@^7.0.1:
-  version "7.4.0"
-  resolved "https://registry.npm.taobao.org/koa-router/download/koa-router-7.4.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fkoa-router%2Fdownload%2Fkoa-router-7.4.0.tgz#aee1f7adc02d5cb31d7d67465c9eacc825e8c5e0"
-  integrity sha1-ruH3rcAtXLMdfWdGXJ6syCXoxeA=
+koa-router@^8.0.8:
+  version "8.0.8"
+  resolved "https://registry.npm.taobao.org/koa-router/download/koa-router-8.0.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fkoa-router%2Fdownload%2Fkoa-router-8.0.8.tgz#f0b70f90dae275db8c71a41e1efb625581fb3b5a"
+  integrity sha1-8LcPkNridduMcaQeHvtiVYH7O1o=
   dependencies:
-    debug "^3.1.0"
-    http-errors "^1.3.1"
-    koa-compose "^3.0.0"
-    methods "^1.0.1"
-    path-to-regexp "^1.1.1"
-    urijs "^1.19.0"
+    debug "^4.1.1"
+    http-errors "^1.7.3"
+    koa-compose "^4.1.0"
+    methods "^1.1.2"
+    path-to-regexp "1.x"
+    urijs "^1.19.2"
 
 koa-static-cache@^4.1.1:
   version "4.1.2"
@@ -7418,7 +7418,7 @@ merge@^1.2.0:
   resolved "https://registry.npm.taobao.org/merge/download/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
   integrity sha1-OL6/gMMiCopIe2/Ps5QbsRcgwUU=
 
-methods@^1.0.1, methods@~1.1.2:
+methods@^1.1.2, methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.npm.taobao.org/methods/download/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
@@ -8557,7 +8557,7 @@ path-to-regexp@0.1.7:
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-0.1.7.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
   integrity sha1-32BBeABfUi8V60SQ5yR6G/qmf4w=
 
-path-to-regexp@^1.1.1, path-to-regexp@^1.7.0:
+path-to-regexp@1.x, path-to-regexp@^1.7.0:
   version "1.8.0"
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-1.8.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-1.8.0.tgz#887b3ba9d84393e87a0a0b9f4cb756198b53548a"
   integrity sha1-iHs7qdhDk+h6CgufTLdWGYtTVIo=
@@ -11762,7 +11762,7 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-urijs@^1.19.0:
+urijs@^1.19.2:
   version "1.19.2"
   resolved "https://registry.npm.taobao.org/urijs/download/urijs-1.19.2.tgz#f9be09f00c4c5134b7cb3cf475c1dd394526265a"
   integrity sha1-+b4J8AxMUTS3yzz0dcHdOUUmJlo=
