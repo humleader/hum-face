@@ -8,21 +8,13 @@ const Sequelize = require('sequelize')
 module.exports = config => {
   const sequelize = new Sequelize(config.database, config.user, config.password, {
     host: config.host,
-
     port: config.port,
-
     dialect: 'mysql',
-    /* eslint no-console:off */
     logging: false,
-
     timezone: '+08:00',
-    /* 加利福尼亚州 */
-    // timezone: '-05:00',
-
     pool: {
       max: 10
     },
-
     define: {
       timestamps: false
     }
@@ -34,7 +26,7 @@ module.exports = config => {
       return file.indexOf('.') !== 0 && file !== 'index.js'
     })
     .forEach(function(file) {
-      var model = sequelize['import'](path.join(__dirname, file))
+      var model = sequelize.import(path.join(__dirname, file))
       db[model.name] = model
     })
 

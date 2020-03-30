@@ -24,7 +24,7 @@ const pkg = require('../package.json')
 global.M = require('./models')(config.dbOption)
 
 // 中间件
-const checkToken = require('./middlewares/check-token')
+// const checkToken = require('./middlewares/check-token')
 const healthCheck = require('./middlewares/health-check')
 const tplRender = require('./middlewares/tpl-render')
 // const sessionRedis = require('./middlewares/session-redis')
@@ -39,7 +39,7 @@ app.name = pkg.name
 app.keys = [`${pkg.group}-${pkg.name}`]
 
 app.use(helmet())
-app.use(checkToken())
+// app.use(checkToken())
 app.use(healthCheck())
 // app.use(sessionRedis())
 

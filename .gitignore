@@ -11,5 +11,6 @@ uploads
 build
 views
 backup
+model
 config/development.app.yaml
 config/production.app.yaml
