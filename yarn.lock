@@ -2326,7 +2326,7 @@ chokidar@^2.0.2, chokidar@^2.1.8:
   optionalDependencies:
     fsevents "^1.2.7"
 
-chokidar@^3.3.0:
+chokidar@^3.2.2, chokidar@^3.3.0:
   version "3.3.1"
   resolved "https://registry.npm.taobao.org/chokidar/download/chokidar-3.3.1.tgz#c84e5b3d18d9a4d77558fef466b1bf16bbeb3450"
   integrity sha1-yE5bPRjZpNd1WP70ZrG/FrvrNFA=
@@ -7909,12 +7909,12 @@ nodemailer@^6.2.1:
   resolved "https://registry.npm.taobao.org/nodemailer/download/nodemailer-6.4.6.tgz#d37f504f6560b36616f646a606894fe18819107f"
   integrity sha1-039QT2Vgs2YW9kamBolP4YgZEH8=
 
-nodemon@^1.9.2:
-  version "1.19.4"
-  resolved "https://registry.npm.taobao.org/nodemon/download/nodemon-1.19.4.tgz#56db5c607408e0fdf8920d2b444819af1aae0971"
-  integrity sha1-VttcYHQI4P34kg0rREgZrxquCXE=
+nodemon@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npm.taobao.org/nodemon/download/nodemon-2.0.2.tgz#9c7efeaaf9b8259295a97e5d4585ba8f0cbe50b0"
+  integrity sha1-nH7+qvm4JZKVqX5dRYW6jwy+ULA=
   dependencies:
-    chokidar "^2.1.8"
+    chokidar "^3.2.2"
     debug "^3.2.6"
     ignore-by-default "^1.0.1"
     minimatch "^3.0.4"
