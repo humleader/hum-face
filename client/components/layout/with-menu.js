@@ -35,7 +35,7 @@ export default function withMenu(WrappedComponent) {
       this.activeMenuByURL(this.props.location.pathname)
     }
 
-    componentWillUpdate(nextProps, nextState, nextContext) {
+    componentUpdateMount(nextProps, nextState, nextContext) {
       function getPathname(context) {
         return context.router.route.location.pathname
       }

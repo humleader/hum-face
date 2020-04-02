@@ -6,7 +6,7 @@ import logoPng from '../../assets/images/logo.png'
 
 import { userInfo, menus, appCode, baseURI, responsive, defaultLayout } from 'common/config'
 
-let { nicknameCn = '' } = userInfo
+const { nicknameCn = '' } = userInfo
 
 const withLayout = (layout = defaultLayout) => WrappedComponent => {
   const CustomerLayout = withMenu(Layout)
@@ -16,6 +16,7 @@ const withLayout = (layout = defaultLayout) => WrappedComponent => {
     static propTypes = {
       location: PropTypes.object.isRequired
     }
+
     render() {
       // 注意：此处使用的 location 是有 react-router Route 组件注入的 props
       const { location } = this.props

@@ -15,7 +15,7 @@ module.exports = async ctx => {
   const initState = getInitState()
   const config = await getConfig(ctx)
 
-  await render(ctx)('index', {
+  await render(ctx)('login', {
     pageTitle,
     config: JSON.stringify(config),
     initState: JSON.stringify(initState),

@@ -27,7 +27,7 @@ global.M = require('./models')(config.dbOption)
 // const checkToken = require('./middlewares/check-token')
 const healthCheck = require('./middlewares/health-check')
 const tplRender = require('./middlewares/tpl-render')
-// const sessionRedis = require('./middlewares/session-redis')
+const sessionRedis = require('./middlewares/session-redis')
 
 const router = require('./router')
 
@@ -41,7 +41,7 @@ app.keys = [`${pkg.group}-${pkg.name}`]
 app.use(helmet())
 // app.use(checkToken())
 app.use(healthCheck())
-// app.use(sessionRedis())
+app.use(sessionRedis())
 
 // 日志
 app.use(
@@ -66,7 +66,7 @@ app.use(
   })
 )
 app.use(
-  staticServer(path.join(__dirname, '../uploads'), {
+  staticServer(path.join(__dirname, './uploads'), {
     maxage: 3600 * 24 * 30,
     gzip: true
   })
@@ -74,7 +74,7 @@ app.use(
 
 app.use(
   jwt({ secret: secret.sign }).unless({
-    path: [/^(?!\/hum\/api)/, /^\/hum\/api\/user\/login/, /^\/hum\/api\/salary\/preview/]
+    path: [/^(?!\/hum\/api)/, /^\/hum\/api\/user\/login/]
   })
 )
 

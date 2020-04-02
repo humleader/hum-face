@@ -16,7 +16,7 @@ export default class CoreRouter extends React.PureComponent {
     return (
       <Switch>
         {this.routes}
-        <Redirect to="/home" />
+        <Redirect to="/user" />
       </Switch>
     )
   }
