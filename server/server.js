@@ -14,17 +14,15 @@ const Koa = require('koa')
 
 // 三方中间件
 const koabody = require('koa-body')
-const jwt = require('koa-jwt')
 const helmet = require('koa-helmet')
 
 // 配置
-const secret = require('./utils/secret.json')
 const config = require('./utils/config')
 const pkg = require('../package.json')
 global.M = require('./models')(config.dbOption)
 
 // 中间件
-// const checkToken = require('./middlewares/check-token')
+const checkToken = require('./middlewares/check-token')
 const healthCheck = require('./middlewares/health-check')
 const tplRender = require('./middlewares/tpl-render')
 const sessionRedis = require('./middlewares/session-redis')
@@ -39,11 +37,10 @@ app.name = pkg.name
 app.keys = [`${pkg.group}-${pkg.name}`]
 
 app.use(helmet())
-// app.use(checkToken())
 app.use(healthCheck())
 app.use(sessionRedis())
+app.use(checkToken())
 
-// 日志
 app.use(
   koabody({
     multipart: true,
@@ -69,12 +66,6 @@ app.use(
   staticServer(path.join(__dirname, './uploads'), {
     maxage: 3600 * 24 * 30,
     gzip: true
-  })
-)
-
-app.use(
-  jwt({ secret: secret.sign }).unless({
-    path: [/^(?!\/hum\/api)/, /^\/hum\/api\/user\/login/]
   })
 )
 

@@ -1,37 +1,44 @@
 module.exports = class {
-  async findOrSave(opts = {}) {
-    return global.M.User.findOrCreate({
-      where: {
-        userName: opts.userName
-      },
-      defaults: {
-        userName: opts.userName
-      }
+  findAndCountAll(params) {
+    const { User } = global.M
+
+    const { where, curPage = 1, pageSize = 20, ...rest } = params
+
+    return User.findAndCountAll({
+      where,
+      limit: +pageSize,
+      offset: (+curPage - 1) * +pageSize,
+      ...rest
     })
   }
 
-  // 获取用户列表
-  async getUserList(filter) {
-    return global.M.User.findAll({
-      where: {
-        ...filter
-      }
-    })
+  findAll(params) {
+    const { User } = global.M
+
+    return User.findAll(params)
   }
 
-  async getUserById(userName) {
-    return global.M.User.findOne({
-      where: {
-        userName
-      }
-    })
+  create(params, option = {}) {
+    const { User } = global.M
+
+    return User.create(params, option)
   }
 
-  async login(params) {
-    return global.M.User.findOne({
-      where: {
-        userName: params.userName
-      }
-    })
+  findOne(params) {
+    const { User } = global.M
+
+    return User.findOne(params)
+  }
+
+  update(params, option = {}) {
+    const { User } = global.M
+
+    return User.update(params, option)
+  }
+
+  destroy(params) {
+    const { User } = global.M
+
+    return User.destroy(params)
   }
 }

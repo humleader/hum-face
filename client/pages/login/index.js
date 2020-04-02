@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Icon, Input, Button, message } from 'antd'
+import CryptoJS from 'crypto-js'
+
+import axios from 'common/axios'
 
 import './index.less'
 
@@ -12,12 +15,33 @@ const Login = props => {
 
   const [loginPending, setLoginPending] = useState(false)
 
+  const searchToObject = search => {
+    const pairs = search.substring(1).split('&')
+    const obj = {}
+    let pair
+    let i
+    for (i in pairs) {
+      if (pairs[i] === '') {
+        continue
+      }
+
+      pair = pairs[i].split('=')
+      obj[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1])
+    }
+    return obj
+  }
+
   useEffect(() => {
     return () => {}
   }, [])
 
   const makeForm = params => {
-    console.log(params)
+    const url = searchToObject(location.search)
+
+    params = {
+      ...url,
+      ...params
+    }
 
     const form = document.createElement('form')
     form.id = 'form-jump'
@@ -25,7 +49,7 @@ const Login = props => {
     // 添加到 body 中
     document.body.appendChild(form)
     for (const key in params) {
-      if (params[key] !== undefined && Object.hasOwnProperty.call(params, key)) {
+      if (Object.prototype.hasOwnProperty.call(params, key)) {
         // 创建一个输入
         const input = document.createElement('input')
         input.type = 'text'
@@ -36,7 +60,7 @@ const Login = props => {
     }
 
     // form 的提交方式
-    form.method = 'POST'
+    form.method = 'GET'
     // form 提交路径
     form.action = '/face/login'
     form.submit()
@@ -48,8 +72,16 @@ const Login = props => {
     validateFields((err, values) => {
       if (!err) {
         setLoginPending(true)
-        makeForm(values)
-        message.success('ss')
+        values.userPassword = CryptoJS.MD5(values.userPassword).toString()
+        axios
+          .post('login', values)
+          .then(rst => {
+            makeForm(values)
+          })
+          .catch(res => {
+            setLoginPending(false)
+            message.error(res.message)
+          })
       }
     })
   }

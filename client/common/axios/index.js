@@ -46,17 +46,12 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use(function(config) {
-  const token = localStorage.getItem('_h_token')
-  if (token) {
-    config.headers['Authorization'] = 'Bearer ' + token
-  }
-
   return config
 })
 
 instance.interceptors.response.use(
   function(response) {
-    let result = response.data
+    const result = response.data
     if (!result) {
       return rejectHttpError('请求异常！')
     }
@@ -72,15 +67,12 @@ instance.interceptors.response.use(
   },
   function(error) {
     if (error.response) {
-      const data = error.response.data
-      if (data) {
-        // token过期
-        if (data.code === 1021) {
-          localStorage.setItem('_h_token', '')
-          window.location = '/face/login'
-          return
-        }
+      const status = error.response.status
+      if (status === 401) {
+        location.href = `${baseURI}/login?callbackUrl=${encodeURIComponent(location.href)}`
+        return
       }
+      const data = error.response.data
       if (data && data.error) {
         return rejectHttpError(data.error, data.code)
       }

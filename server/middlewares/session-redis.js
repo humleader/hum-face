@@ -9,12 +9,11 @@ module.exports = option => {
       port: config.redis.port,
       password: config.redis.password
     }),
-    key: 'HUM', // cookie中此key的值就是sessionId
+    key: 'HUM_SESS', // cookie中此key的值就是sessionId
     cookie: {
       httpOnly: true, // 必启xss
       secure: false, // true=https
-      maxAge: 1000 * 60 * 60 * 24 * 30 // 生命周期
-      // domain: _domain
+      maxAge: 1000 * 60 * 60 * 24 * 7 // 生命周期
     },
 
     errorHandler: (err, type, ctx) => {

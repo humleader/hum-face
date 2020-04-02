@@ -7,7 +7,7 @@ const root = path.join(__dirname, '../')
 const srcPath = path.join(root, 'client')
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   context: srcPath,
   entry: {
     vendor: [
@@ -32,7 +32,7 @@ module.exports = {
 
   plugins: [
     new webpack.DllPlugin({
-      context: srcPath, // 必填项，用来标志manifest中的路径
+      context: __dirname, // 必填项，用来标志manifest中的路径
       path: path.join(srcPath, 'dll', '[name]-manifest.json'), // 必填项，存放manifest的路径
       name: '[name]' // 必填项，manifest 的 name, 这里这里要与 output.library 名字保持一致
     })

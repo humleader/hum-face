@@ -2,9 +2,8 @@
 const User = require('daos/user')
 module.exports = async ctx => {
   const user = new User()
-  const filter = {}
 
-  const userData = await user.getUserList(filter)
+  const userData = await user.findAll()
 
   const data = userData.map(item => {
     const temp = {
