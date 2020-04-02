@@ -12,15 +12,13 @@ import zhCN from 'antd/es/locale/zh_CN'
 import Login from 'pages/login'
 
 ReactDOM.render(
-  [
-    <ConfigProvider key="provider" locale={zhCN}>
-      <Router history={history}>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Redirect to="/login" />
-        </Switch>
-      </Router>
-    </ConfigProvider>
-  ],
+  <ConfigProvider key="provider" locale={zhCN}>
+    <Router history={history}>
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Redirect to="/login" />
+      </Switch>
+    </Router>
+  </ConfigProvider>,
   document.getElementById('root')
 )
