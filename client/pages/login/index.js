@@ -62,7 +62,7 @@ const Login = props => {
     // form 的提交方式
     form.method = 'GET'
     // form 提交路径
-    form.action = '/face/login'
+    form.action = '/login'
     form.submit()
     document.body.removeChild(form)
   }
@@ -74,7 +74,7 @@ const Login = props => {
         setLoginPending(true)
         values.userPassword = CryptoJS.MD5(values.userPassword).toString()
         axios
-          .post('login', values)
+          .post('/user/login', values)
           .then(rst => {
             makeForm(values)
           })

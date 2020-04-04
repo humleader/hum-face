@@ -69,7 +69,7 @@ instance.interceptors.response.use(
     if (error.response) {
       const status = error.response.status
       if (status === 401) {
-        location.href = `${baseURI}/login?callbackUrl=${encodeURIComponent(location.href)}`
+        location.href = `/login?callbackUrl=${encodeURIComponent(location.href)}`
         return
       }
       const data = error.response.data
