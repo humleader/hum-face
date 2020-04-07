@@ -4,18 +4,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Header from './header'
-// import MainMenu from './main-menu'
+import MainMenu from './main-menu'
 
-export default function PageHeader({ selectedMenus, menus, responsive, logoutUrl, userName }) {
+export default function PageHeader({ selectedMenus, menus, userInfo }) {
   return (
-    <div className="hum-header">
-      {/* <MainMenu
-        logoutUrl={logoutUrl}
-        selectedMenus={selectedMenus}
-        menus={menus}
-        responsive={responsive}
-      /> */}
-      <Header logoutUrl={logoutUrl} userName={userName} />
+    <div className="papaya-header">
+      <MainMenu selectedMenus={selectedMenus} menus={menus} />
+      <Header userInfo={userInfo} />
     </div>
   )
 }
@@ -23,7 +18,5 @@ export default function PageHeader({ selectedMenus, menus, responsive, logoutUrl
 PageHeader.propTypes = {
   selectedMenus: PropTypes.array.isRequired,
   menus: PropTypes.array,
-  responsive: PropTypes.bool.isRequired,
-  userName: PropTypes.string.isRequired,
-  logoutUrl: PropTypes.string.isRequired
+  userInfo: PropTypes.string.isRequired
 }

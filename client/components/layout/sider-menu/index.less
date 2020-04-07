@@ -1,0 +1,30 @@
+@import "~antd/lib/style/themes/default.less";
+
+.logo {
+  height: @layout-header-height;
+  line-height: @layout-header-height;
+  position: relative;
+  padding-left: (@menu-collapsed-width - @layout-header-height / 2) / 2;
+  transition: all 0.2s;
+  background: #FF4A5C;
+  overflow: hidden;
+  margin-bottom: 4px;
+
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    height: 32px;
+  }
+
+  h1 {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 15px;
+    margin: 0 0 0 6px;
+    max-width: 140px;
+    height: @layout-header-height;
+    word-break: break-all;
+    overflow: hidden;
+  }
+}

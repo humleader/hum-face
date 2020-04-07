@@ -32,7 +32,7 @@ function getInitState() {
 async function getConfig(ctx) {
   let userInfo = {}
   userInfo = {
-    ...ctx.user
+    ...ctx.session.user
   }
 
   return {

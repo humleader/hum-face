@@ -21,7 +21,7 @@ function hasChild(menu) {
 
 // 获取菜单
 function getMenuItem(menu) {
-  let { icon, name, path } = menu
+  const { icon, name, path } = menu
 
   const content = (
     <span>
@@ -34,6 +34,7 @@ function getMenuItem(menu) {
 
   if (isHref(path)) {
     return (
+      // eslint-disable-next-line react/jsx-no-target-blank
       <a href={path} target="_blank">
         {content}
       </a>
@@ -68,7 +69,7 @@ const traverseDown = (trees = [], cb) => {
 export function getActiveMenu(menus, pathname) {
   let menu
   // 权重
-  let weight = 0
+  const weight = 0
 
   traverseDown(menus, item => {
     // 路径完全匹配

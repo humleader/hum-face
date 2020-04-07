@@ -2,7 +2,7 @@
 appCode: hum-face
 
 # 系统的标题
-pageTitle: 脸-用户管理平台
+pageTitle: 统一登录平台-脸
 
 # 主题
 theme: antd/diy

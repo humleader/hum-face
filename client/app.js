@@ -15,7 +15,17 @@ import withLayout from 'components/layout/with-layout'
 import history from './common/history'
 import { models } from './store'
 
-const RouteComponent = withLayout()(CoreRouter)
+import logo from './assets/images/logo.png'
+
+import { userInfo, menus, appCode } from 'common/config'
+
+const RouteComponent = withLayout({
+  title: '统一登录平台',
+  appCode,
+  userInfo,
+  menus,
+  logo
+})(CoreRouter)
 
 const store = init({
   models

@@ -1,54 +1,38 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import cn from 'classnames'
 import Layout from './layout'
 import withMenu from './with-menu'
-import logoPng from '../../assets/images/logo.png'
 
-import { userInfo, menus, appCode, baseURI, responsive, defaultLayout } from 'common/config'
-
-const { nicknameCn = '' } = userInfo
-
-const withLayout = (layout = defaultLayout) => WrappedComponent => {
+const withLayout = ({
+  appCode,
+  className = '',
+  menus,
+  userInfo,
+  title,
+  logo
+}) => WrappedComponent => {
   const CustomerLayout = withMenu(Layout)
 
-  return class extends React.Component {
-    static displayName = `${layout}Layout`
-    static propTypes = {
-      location: PropTypes.object.isRequired
-    }
-
-    render() {
-      // 注意：此处使用的 location 是有 react-router Route 组件注入的 props
-      const { location } = this.props
-      return layout !== 'blank' ? (
-        <CustomerLayout
-          menus={menus}
-          logoutUrl={`${baseURI}/logout`}
-          userName={nicknameCn}
-          title="禾优曼管理系统"
-          appCode={appCode}
-          logo={logoPng}
-          responsive={responsive}
-          className={this.className}
-          layout={layout}
-          location={location}
-        >
-          <WrappedComponent {...this.props} />
-        </CustomerLayout>
-      ) : (
-        <WrappedComponent {...this.props} />
-      )
-    }
-
-    get className() {
-      let className = `hum-layout hum-layout-${layout}`
-      if (responsive) {
-        className += ' hum-layout-responsive'
-      }
-
-      return className
-    }
+  // 注意：props 是 react-router Route 组件注入的 props
+  const withLayoutHoc = props => {
+    return (
+      <CustomerLayout
+        appCode={appCode}
+        menus={menus}
+        userInfo={userInfo}
+        title={title}
+        logo={logo}
+        className={cn(`hum-layout`, className)}
+        {...props}
+      >
+        <WrappedComponent {...props} />
+      </CustomerLayout>
+    )
   }
+  // 调试显示的名称
+  withLayoutHoc.displayName = `withLayout(withLayoutHoc)`
+
+  return withLayoutHoc
 }
 
 export default withLayout

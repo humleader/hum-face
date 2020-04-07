@@ -6,6 +6,29 @@ const menus = [
       {
         name: '设置',
         path: '/user',
+        icon: 'setting',
+        children: [
+          {
+            name: '设置',
+            path: '/user2',
+            icon: 'setting'
+          }
+        ]
+      },
+      {
+        name: '设置2',
+        path: '/user3',
+        icon: 'setting'
+      }
+    ]
+  },
+  {
+    name: '示例代码2',
+    icon: 'appstore-o',
+    children: [
+      {
+        name: '设置',
+        path: '/user1',
         icon: 'setting'
       }
     ]
