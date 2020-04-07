@@ -1,7 +1,6 @@
 // 页面顶部
 import './header.less'
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import Header from './header'
 import MainMenu from './main-menu'
@@ -13,10 +12,4 @@ export default function PageHeader({ selectedMenus, menus, userInfo }) {
       <Header userInfo={userInfo} />
     </div>
   )
-}
-
-PageHeader.propTypes = {
-  selectedMenus: PropTypes.array.isRequired,
-  menus: PropTypes.array,
-  userInfo: PropTypes.string.isRequired
 }

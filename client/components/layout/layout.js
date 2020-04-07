@@ -16,6 +16,8 @@ const AntdLayout = props => {
     selectedMenus,
     className,
     appCode,
+    openKeys,
+    onMenuClick,
     userInfo
   } = props
 
@@ -40,6 +42,8 @@ const AntdLayout = props => {
         title={title}
         menus={siderMenu}
         selectedMenus={selectedMenus}
+        openKeys={openKeys}
+        onMenuClick={onMenuClick}
         collapsed={collapsed}
         onCollapse={handleOnCollapse}
       />

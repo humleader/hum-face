@@ -5,19 +5,29 @@ const menus = [
     children: [
       {
         name: '设置',
-        path: '/user',
         icon: 'setting',
         children: [
           {
             name: '设置',
-            path: '/user2',
+            path: '/user',
+            icon: 'setting'
+          }
+        ]
+      },
+      {
+        name: '设置1',
+        icon: 'setting',
+        children: [
+          {
+            name: '设置1',
+            path: '/user1',
             icon: 'setting'
           }
         ]
       },
       {
         name: '设置2',
-        path: '/user3',
+        path: '/user2',
         icon: 'setting'
       }
     ]
@@ -27,8 +37,8 @@ const menus = [
     icon: 'appstore-o',
     children: [
       {
-        name: '设置',
-        path: '/user1',
+        name: '设置3',
+        path: '/user3',
         icon: 'setting'
       }
     ]

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import _ from 'lodash'
+import { get, remove, indexOf, concat, omit } from 'lodash'
 
 import { getActiveMenu, getParents, getChildPath, getDisplayName } from './util'
 
@@ -12,10 +12,11 @@ export default function withMenu(WrappedComponent) {
     } = props
 
     const [selectedMenus, setSelectedMenus] = useState([])
+    const [openKeys, setOpenKeys] = useState([])
 
     const basicMenus = () => {
       const mainMenu = menus.map(m => {
-        const menu = _.omit(m, 'children')
+        const menu = omit(m, 'children')
         menu.path = getChildPath(m)
 
         return menu
@@ -23,7 +24,7 @@ export default function withMenu(WrappedComponent) {
 
       const selectedMainMenu = menus.find(m => m.id === selectedMenus[0])
       const siderMenu =
-        (selectedMainMenu && selectedMainMenu.children) || _.get(menus, '[0].children')
+        (selectedMainMenu && selectedMainMenu.children) || get(menus, '[0].children')
 
       return { mainMenu, siderMenu }
     }
@@ -43,15 +44,40 @@ export default function withMenu(WrappedComponent) {
       setSelectedMenus(selectedMenus)
     }
 
+    const activeOpenKeys = pathname => {
+      const selectedMenus = findselectedMenusByURL(menus, pathname)
+      setOpenKeys(selectedMenus)
+    }
+    const onMenuClick = ({ key }) => {
+      let curKey = [key]
+      if (indexOf(openKeys, key) !== -1) {
+        remove(openKeys, res => {
+          return res === key
+        })
+        curKey = openKeys
+      } else {
+        curKey = concat(curKey, openKeys)
+      }
+
+      setOpenKeys(curKey)
+    }
+
     useEffect(() => {
       activeMenuByURL(pathname)
       return () => {}
     }, [pathname])
 
+    useEffect(() => {
+      activeOpenKeys(pathname)
+      return () => {}
+    }, [])
+
     return (
       <WrappedComponent
         {...props}
         selectedMenus={selectedMenus}
+        openKeys={openKeys}
+        onMenuClick={onMenuClick}
         mainMenu={mainMenu}
         siderMenu={siderMenu}
       />

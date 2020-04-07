@@ -8,7 +8,7 @@ import './index.less'
 import { renderMenu } from '../util'
 
 export default function SiderMenu(props) {
-  const { collapsed, logo, title, selectedMenus, menus, onCollapse, onMenuClick } = props
+  const { collapsed, logo, title, selectedMenus, menus, onCollapse, openKeys, onMenuClick } = props
 
   const logoContent = (
     <div className="logo">
@@ -19,17 +19,25 @@ export default function SiderMenu(props) {
     </div>
   )
 
+  let menuProps = {}
+  if (!collapsed) {
+    menuProps = { openKeys }
+  }
+
   return !isEmpty(menus) ? (
     <Layout.Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
       {logoContent}
       <Menu
         mode="inline"
+        inlineIndent={24}
         style={{ height: '100%', background: '#fff' }}
         inlineCollapsed={collapsed}
         selectedKeys={selectedMenus}
-        onClick={onMenuClick}
+        {...menuProps}
       >
-        {menus.map(renderMenu)}
+        {menus.map(menu => {
+          return renderMenu(menu, onMenuClick)
+        })}
       </Menu>
     </Layout.Sider>
   ) : (

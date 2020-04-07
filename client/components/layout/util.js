@@ -4,9 +4,9 @@ import { Menu, Icon } from 'antd'
 import _ from 'lodash'
 
 // 渲染菜单和子菜单
-export function renderMenu(menu) {
+export function renderMenu(menu, onSubMenu) {
   return hasChild(menu) ? (
-    <Menu.SubMenu key={menu.id} title={getMenuItem(menu)}>
+    <Menu.SubMenu onTitleClick={onSubMenu} key={menu.id} title={getMenuItem(menu)}>
       {menu.children.map(renderMenu)}
     </Menu.SubMenu>
   ) : (
