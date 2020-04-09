@@ -21,41 +21,18 @@ export default class List extends Component {
   columns = [
     {
       title: '姓名',
-      width: '80px',
       dataIndex: 'canName',
       fixed: 'left'
     },
     {
       title: '英文名',
-      width: '60px',
       dataIndex: 'canEnName',
       fixed: 'left'
     },
     {
       title: '目前公司',
       dataIndex: 'canCompany',
-      width: '180px',
       fixed: 'left'
-    },
-    {
-      title: '目前职位',
-      dataIndex: 'canPosition'
-    },
-    {
-      title: '薪资',
-      dataIndex: 'canSalary'
-    },
-    {
-      title: '城市',
-      dataIndex: 'canCity'
-    },
-    {
-      title: '手机',
-      dataIndex: 'canPhone'
-    },
-    {
-      title: '邮箱',
-      dataIndex: 'canEmail'
     },
     {
       title: '学历',
@@ -123,7 +100,7 @@ export default class List extends Component {
         onRow={this.handleOnRowClick}
         columns={this.columns}
         dataSource={dataSource.rows || []}
-        scroll={{ x: 1600 }}
+        // scroll={{ x: 1600 }}
         pagination={false}
       />
     )

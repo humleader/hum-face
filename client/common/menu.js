@@ -38,7 +38,7 @@ const menus = [
     children: [
       {
         name: '设置3',
-        path: '/user3',
+        path: '/user1',
         icon: 'setting'
       }
     ]

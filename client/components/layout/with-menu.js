@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { get, remove, indexOf, concat, omit } from 'lodash'
+import { get, omit } from 'lodash'
 
 import { getActiveMenu, getParents, getChildPath, getDisplayName } from './util'
 
@@ -42,22 +42,19 @@ export default function withMenu(WrappedComponent) {
     const activeMenuByURL = pathname => {
       const selectedMenus = findselectedMenusByURL(menus, pathname)
       setSelectedMenus(selectedMenus)
-    }
-
-    const activeOpenKeys = pathname => {
-      const selectedMenus = findselectedMenusByURL(menus, pathname)
       setOpenKeys(selectedMenus)
     }
+
     const onMenuClick = ({ key }) => {
-      let curKey = [key]
-      if (indexOf(openKeys, key) !== -1) {
-        remove(openKeys, res => {
-          return res === key
-        })
-        curKey = openKeys
-      } else {
-        curKey = concat(curKey, openKeys)
-      }
+      const curKey = [key]
+      // if (indexOf(openKeys, key) !== -1) {
+      //   remove(openKeys, res => {
+      //     return res === key
+      //   })
+      //   curKey = openKeys
+      // } else {
+      //   curKey = concat(curKey, openKeys)
+      // }
 
       setOpenKeys(curKey)
     }
@@ -66,11 +63,6 @@ export default function withMenu(WrappedComponent) {
       activeMenuByURL(pathname)
       return () => {}
     }, [pathname])
-
-    useEffect(() => {
-      activeOpenKeys(pathname)
-      return () => {}
-    }, [])
 
     return (
       <WrappedComponent
