@@ -11,12 +11,10 @@ export default function SiderMenu(props) {
   const { collapsed, logo, title, selectedMenus, menus, onCollapse, openKeys, onMenuClick } = props
 
   const logoContent = (
-    <div className="logo">
-      <Link to="/">
-        {logo && <img src={logo} alt={title} />}
-        {(!collapsed || !logo) && <h1>{title}</h1>}
-      </Link>
-    </div>
+    <Link className="logo-link" to="/">
+      {logo && <img src={logo} alt={title} />}
+      {(!collapsed || !logo) && <h1>{title}</h1>}
+    </Link>
   )
 
   let menuProps = {}

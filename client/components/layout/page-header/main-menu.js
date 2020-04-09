@@ -24,8 +24,7 @@ export default class Header extends React.Component {
     }
 
     const menuProps = {
-      selectedKeys: selectedMenus,
-      theme: 'dark'
+      selectedKeys: selectedMenus
     }
 
     menuProps.mode = 'horizontal'

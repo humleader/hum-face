@@ -1,9 +1,10 @@
 @import "~antd/lib/style/themes/default.less";
 
-.logo {
+.logo-link {
   height: @layout-header-height;
   line-height: @layout-header-height;
-  position: relative;
+  display: flex;
+  align-items: center;
   padding-left: (@menu-collapsed-width - @layout-header-height / 2) / 2;
   transition: all 0.2s;
   background: #FF4A5C;
@@ -11,19 +12,15 @@
   margin-bottom: 4px;
 
   img {
-    display: inline-block;
-    vertical-align: middle;
     height: 32px;
   }
 
   h1 {
     color: #fff;
-    display: inline-block;
-    vertical-align: middle;
     font-size: 15px;
     margin: 0 0 0 6px;
     max-width: 140px;
-    height: @layout-header-height;
+    height: 48px;
     word-break: break-all;
     overflow: hidden;
   }

@@ -16,7 +16,7 @@ export default class ListTable extends React.Component {
     const list = user.get('list')
 
     return (
-      <div className="m-content">
+      <div className="hum-content">
         {/* 列表 */}
         <List list={list} action={action} />
       </div>

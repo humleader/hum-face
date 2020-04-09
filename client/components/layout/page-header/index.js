@@ -7,7 +7,7 @@ import MainMenu from './main-menu'
 
 export default function PageHeader({ selectedMenus, menus, userInfo }) {
   return (
-    <div className="papaya-header">
+    <div className="hum-header">
       <MainMenu selectedMenus={selectedMenus} menus={menus} />
       <Header userInfo={userInfo} />
     </div>
