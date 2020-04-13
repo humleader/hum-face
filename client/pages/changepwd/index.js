@@ -8,12 +8,13 @@ import './index.less'
 
 const FormItem = Form.Item
 
-const Login = props => {
+const Changepwd = props => {
   const { form } = props
 
   const { getFieldDecorator, validateFields } = form
 
   const [loginPending, setLoginPending] = useState(false)
+  const [changeStatus, setChangeStatus] = useState(false)
 
   useEffect(() => {
     return () => {}
@@ -38,6 +39,7 @@ const Login = props => {
           .post('/user/changepwd', values)
           .then(rst => {
             setLoginPending(false)
+            setChangeStatus(true)
             message.success('修改密码成功')
           })
           .catch(res => {
@@ -105,16 +107,28 @@ const Login = props => {
               />
             )}
           </FormItem>
-          <a href={window.location.origin + '/login'}>首页</a>
-          <Button
-            size="large"
-            type="primary"
-            htmlType="submit"
-            loading={loginPending}
-            className="login-form-button"
-          >
-            登录
-          </Button>
+
+          {changeStatus ? (
+            <Button
+              size="large"
+              onClick={() => {
+                location.href = window.location.origin + '/login'
+              }}
+              className="login-form-button"
+            >
+              去登录
+            </Button>
+          ) : (
+            <Button
+              size="large"
+              type="primary"
+              htmlType="submit"
+              loading={loginPending}
+              className="login-form-button"
+            >
+              登录
+            </Button>
+          )}
         </Form>
       </div>
       <p className="point" />
@@ -122,4 +136,4 @@ const Login = props => {
   )
 }
 
-export default Form.create()(Login)
+export default Form.create()(Changepwd)
