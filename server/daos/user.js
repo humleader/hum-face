@@ -18,10 +18,10 @@ module.exports = class {
     return User.findAll(params)
   }
 
-  create(params, option = {}) {
+  create(params, options = {}) {
     const { User } = global.M
 
-    return User.create(params, option)
+    return User.create(params, options)
   }
 
   findOne(params) {
@@ -30,10 +30,10 @@ module.exports = class {
     return User.findOne(params)
   }
 
-  update(params, option = {}) {
+  update(params, options = {}) {
     const { User } = global.M
 
-    return User.update(params, option)
+    return User.update(params, options)
   }
 
   destroy(params) {

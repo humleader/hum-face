@@ -12,6 +12,7 @@ const router = new Router()
 // 首页
 router
   .get('/', home)
+  .get(`/changepwd`, login)
   .get(`/login`, login)
   .get(`/logout`, logout)
   // 路由定义

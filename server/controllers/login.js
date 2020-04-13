@@ -4,7 +4,7 @@ const env = process.env.NODE_ENV || 'development'
 
 module.exports = async ctx => {
   const { callbackUrl } = ctx.query
-  if (ctx.session.user) {
+  if (ctx.session.user && ctx.path !== '/changepwd') {
     ctx.redirect(callbackUrl || '/')
   } else {
     await render(ctx)('login', {

@@ -10,12 +10,14 @@ import history from './common/history'
 import zhCN from 'antd/es/locale/zh_CN'
 
 import Login from 'pages/login'
+import ChangePwd from 'pages/changepwd'
 
 ReactDOM.render(
   <ConfigProvider key="provider" locale={zhCN}>
     <Router history={history}>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/changepwd" component={ChangePwd} />
         <Redirect to="/login" />
       </Switch>
     </Router>

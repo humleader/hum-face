@@ -14,13 +14,16 @@ const env = process.env.NODE_ENV || 'development'
 module.exports = async ctx => {
   const initState = getInitState()
   const config = await getConfig(ctx)
-
-  await render(ctx)('index', {
-    pageTitle,
-    config: JSON.stringify(config),
-    initState: JSON.stringify(initState),
-    baseURI
-  })
+  if (!ctx.session.user) {
+    ctx.redirect(`/login?${encodeURIComponent(ctx.href)}`)
+  } else {
+    await render(ctx)('index', {
+      pageTitle,
+      config: JSON.stringify(config),
+      initState: JSON.stringify(initState),
+      baseURI
+    })
+  }
 }
 
 // 提供给前台 redux 作为初始化 state
