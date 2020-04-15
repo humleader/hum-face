@@ -1,4 +1,4 @@
-const { baseURI, apiPrefix } = require('utils/config')
+const { baseURI, apiPrefix, pageTitle } = require('utils/config')
 
 const env = process.env.NODE_ENV || 'development'
 
@@ -8,6 +8,7 @@ module.exports = async ctx => {
     ctx.redirect(callbackUrl || '/')
   } else {
     await render(ctx)('login', {
+      pageTitle,
       config: JSON.stringify({ baseURI, apiPrefix })
     })
   }

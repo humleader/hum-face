@@ -27,7 +27,7 @@ module.exports = async ctx => {
           }
         }
       )
-      ctx.session.user = null
+      ctx.session = null
       ctx.body = {
         code: 0,
         data: res,
