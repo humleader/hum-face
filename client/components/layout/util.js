@@ -21,11 +21,12 @@ function hasChild(menu) {
 
 // 获取菜单
 function getMenuItem(menu) {
-  const { icon, name, path } = menu
+  const { icon, name, path, selfIcon } = menu
 
   const content = (
     <span>
       {icon && <Icon type={icon} />}
+      {selfIcon && <i className={`iconfont ${selfIcon}`} />}
       <span>{name}</span>
     </span>
   )

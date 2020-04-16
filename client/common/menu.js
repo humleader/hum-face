@@ -23,7 +23,7 @@ const menus = [
       },
       {
         name: '日志管理',
-        icon: 'setting',
+        selfIcon: 'icon-shujujilu',
         children: [
           {
             name: '登录日志',
