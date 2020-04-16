@@ -4,42 +4,36 @@ const menus = [
     icon: 'appstore-o',
     children: [
       {
-        name: '设置',
+        name: '系统配置',
         icon: 'setting',
         children: [
           {
-            name: '设置',
-            path: '/user',
-            icon: 'setting'
+            name: '用户管理',
+            path: '/user'
+          },
+          {
+            name: '角色管理',
+            path: '/role'
+          },
+          {
+            name: '权限管理',
+            path: '/power'
           }
         ]
       },
       {
-        name: '设置1',
+        name: '日志管理',
         icon: 'setting',
         children: [
           {
-            name: '设置1',
-            path: '/user1',
-            icon: 'setting'
+            name: '登录日志',
+            path: '/log/login'
+          },
+          {
+            name: '操作日志',
+            path: '/log/operation'
           }
         ]
-      },
-      {
-        name: '设置2',
-        path: '/user2',
-        icon: 'setting'
-      }
-    ]
-  },
-  {
-    name: '示例代码2',
-    icon: 'appstore-o',
-    children: [
-      {
-        name: '设置3',
-        path: '/user1',
-        icon: 'setting'
       }
     ]
   }
