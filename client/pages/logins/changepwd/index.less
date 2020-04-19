@@ -1,0 +1,68 @@
+body {
+  background: transparent url(../../../assets/images/login/bg.png) no-repeat center / cover;
+}
+
+.page-changepwd {
+  height: 380px;
+  width: 700px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -380px/2 0 0 -700px/2;
+  background: #FFFFFF;
+  border-radius: 4px;
+  display: flex;
+
+  .b-left {
+    position: relative;
+    background: url(../../../assets/images/login/leftbg.png) no-repeat #ff4a5c;
+    width: 210px;
+    height: 100%;
+    background-size: 100% 100%;
+    z-index: 10;
+    font-size: 18px;
+    color: #FFFFFF;
+    text-align: center;
+    padding-top: 30px;
+    border-radius: 2px 0 0 2px;
+  }
+
+  .b-right {
+    flex: 1;
+    padding: 30px;
+    position: relative;
+
+    .login-title {
+      font-size: 18px;
+      color: #333333;
+      margin-bottom: 33px;
+    }
+
+    .form-item {
+      .login-input {
+        height: 40px;
+      }
+
+      margin: 0;
+      margin-bottom: 16px;
+    }
+
+    .login-form-button {
+      width: 52%;
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
+
+  .point {
+    position: absolute;
+    left: -28px;
+    top: -28px;
+    background: url(../../../assets/images/login/point.png) no-repeat;
+    width: 118px;
+    height: 230px;
+    background-size: 100% 100%;
+  }
+}

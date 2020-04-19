@@ -1,0 +1,73 @@
+body {
+    background: transparent url(../../../assets/images/login/bg.png) no-repeat center / cover;
+}
+
+.login-box {
+    height: 320px;
+    width: 630px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -320px/2 0 0 -630px/2;
+    background: #FFFFFF;
+    border-radius: 4px;
+    display: flex;
+    .b-left {
+        position: relative;
+        background: url(../../../assets/images/login/leftbg.png) no-repeat #ff4a5c;
+        border-radius: 2px 0 0 2px;
+        width: 210px;
+        height: 320px;
+        background-size: 100% 100%;
+        z-index: 10;
+        .logo {
+            background: url(../../../assets/images/logo.png) no-repeat;
+            width: 20px;
+            height: 26px;
+            background-size: 100% 100%;
+            margin: 48px auto 24px;
+        }
+        .name {
+            font-size: 18px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+    }
+    .b-right {
+        flex: 1;
+        padding: 42px 75px;
+        .login-title {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 33px;
+        }
+        .login-form {
+            .login-input {
+                height: 40px;
+            }
+            .ant-input {
+                border: 0;
+                border-bottom: 1px solid #e5e5e5;
+                border-radius: 0;
+                outline: none;
+                box-shadow: none;
+            }
+            .ant-form-item {
+                margin-bottom: 10px;
+            }
+            .login-form-button {
+                margin-top: 30px;
+                width: 100%;
+            }
+        }
+    }
+    .point {
+      position: absolute;
+      left: -28px;
+      top: -28px;
+      background: url(../../../assets/images/login/point.png) no-repeat;
+      width: 118px;
+      height: 230px;
+      background-size: 100% 100%;
+    }
+}

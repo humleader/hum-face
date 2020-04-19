@@ -1,0 +1,14 @@
+{
+  "name": "proxy-static-server",
+  "port": 3000,
+  "staticDir": "build",
+  "index": "index",
+  "ext": "html",
+  "templateDir": "server/views",
+  "proxyTable": {
+    "/api": {
+      "target": "https://api.github.com/",
+      "changeOrigin": true
+    }
+  }
+}
