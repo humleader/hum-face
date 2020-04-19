@@ -9,8 +9,8 @@ import { ConfigProvider } from 'antd'
 import history from './common/history'
 import zhCN from 'antd/es/locale/zh_CN'
 
-import Login from 'pages/login'
-import ChangePwd from 'pages/changepwd'
+import Login from 'pages/logins/login'
+import ChangePwd from 'pages/logins/changepwd'
 
 ReactDOM.render(
   <ConfigProvider key="provider" locale={zhCN}>

@@ -1,6 +1,5 @@
 import React from 'react'
 import NProgress from 'nprogress'
-import PropTypes from 'prop-types'
 
 const Loading = ({ error }) => {
   if (error) {
@@ -24,7 +23,5 @@ const Loading = ({ error }) => {
     return null
   }
 }
-Loading.propTypes = {
-  error: PropTypes.object
-}
+
 export default Loading

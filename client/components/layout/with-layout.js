@@ -25,7 +25,7 @@ const withLayout = ({
         className={cn(`hum-layout`, className)}
         {...props}
       >
-        <WrappedComponent {...props} />
+        <WrappedComponent menus={menus} {...props} />
       </CustomerLayout>
     )
   }

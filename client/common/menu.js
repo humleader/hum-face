@@ -6,6 +6,7 @@ const menus = [
       {
         name: '系统配置',
         icon: 'setting',
+        path: '/setting',
         children: [
           {
             name: '用户管理',
@@ -24,14 +25,15 @@ const menus = [
       {
         name: '日志管理',
         selfIcon: 'icon-shujujilu',
+        path: '/log',
         children: [
           {
             name: '登录日志',
-            path: '/log/login'
+            path: '/login'
           },
           {
             name: '操作日志',
-            path: '/log/operation'
+            path: '/operation'
           }
         ]
       }
