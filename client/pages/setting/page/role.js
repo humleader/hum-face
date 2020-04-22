@@ -1,17 +1,17 @@
-import ListTable from '../components'
+import ListTable from '../components/role-list'
 import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
-  const user = state.user
+  const setting = state.setting
   return {
-    user
+    setting
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     action: {
-      ...dispatch.user
+      ...dispatch.setting
     }
   }
 }

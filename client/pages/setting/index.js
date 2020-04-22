@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import lazyloader from 'components/router/lazyloader'
 
@@ -13,12 +13,20 @@ const Setting = props => {
     return children.map(page => (
       <Route
         key={page.id}
-        component={lazyloader(() => import(`pages/setting/page${page.path}`))}
+        exact
+        component={lazyloader(() =>
+          import(`pages/setting/page${page.path.replace('/setting', '')}`)
+        )}
         path={`${page.path}`}
       />
     ))
   }
 
-  return <Switch>{routes()}</Switch>
+  return (
+    <Switch>
+      {routes()}
+      <Redirect to="/setting/user" />
+    </Switch>
+  )
 }
 export default Setting

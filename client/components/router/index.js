@@ -14,8 +14,8 @@ const CoreRouter = props => {
         <Route
           key={page.id}
           children={page.children}
-          component={lazyloader(() => import(`pages${page.path}`))}
-          path={`${page.path}`}
+          component={lazyloader(() => import(`pages${page.ppath}`))}
+          path={`${page.ppath}`}
         />
       ))
     )

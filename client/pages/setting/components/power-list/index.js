@@ -1,42 +1,23 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 import history from 'common/history'
 import moment from 'moment'
 import { Table, Divider } from 'antd'
+
 import './index.less'
 
-export default class List extends Component {
-  static propTypes = {
-    list: PropTypes.object,
-    action: PropTypes.object
-  }
+const List = props => {
+  const { setting } = props
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      cardActionType: ''
-    }
-  }
+  const { loading, dataSource = {} } = setting.toJS()
 
-  columns = [
+  useEffect(() => {
+    return () => {}
+  }, [])
+
+  const columns = [
     {
-      title: '姓名',
-      dataIndex: 'canName',
-      fixed: 'left'
-    },
-    {
-      title: '英文名',
-      dataIndex: 'canEnName',
-      fixed: 'left'
-    },
-    {
-      title: '目前公司',
-      dataIndex: 'canCompany',
-      fixed: 'left'
-    },
-    {
-      title: '学历',
-      dataIndex: 'canEducation'
+      title: '用户名',
+      dataIndex: 'name'
     },
     {
       title: '更新时间',
@@ -77,7 +58,7 @@ export default class List extends Component {
     }
   ]
 
-  handleOnRowClick = record => {
+  const handleOnRowClick = record => {
     return {
       onClick: () => {
         history.push(`/candidate/view/${record.id}`)
@@ -85,24 +66,20 @@ export default class List extends Component {
     }
   }
 
-  componentDidMount() {}
-
-  render() {
-    const { list } = this.props
-
-    const { loading, dataSource = {} } = list.toJS()
-
-    return (
+  return (
+    <div className="page-power">
+      page-power
       <Table
         rowKey="id"
         className="table-list"
         loading={loading}
-        onRow={this.handleOnRowClick}
-        columns={this.columns}
+        onRow={handleOnRowClick}
+        columns={columns}
         dataSource={dataSource.rows || []}
-        // scroll={{ x: 1600 }}
         pagination={false}
       />
-    )
-  }
+    </div>
+  )
 }
+
+export default List

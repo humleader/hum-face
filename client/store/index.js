@@ -1,10 +1,10 @@
 /**
  * 根 models
  */
-import user from '../pages/user/model'
+import setting from '../pages/setting/model'
 import common from './model'
 
 export const models = {
   common,
-  user
+  setting
 }
