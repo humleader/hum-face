@@ -6,7 +6,7 @@ const menus = [
       {
         name: '系统配置',
         icon: 'setting',
-        ppath: '/setting',
+        ppath: 'setting',
         children: [
           {
             name: '用户管理',
@@ -25,7 +25,7 @@ const menus = [
       {
         name: '日志管理',
         selfIcon: 'icon-shujujilu',
-        ppath: '/log',
+        ppath: 'log',
         children: [
           {
             name: '登录日志',

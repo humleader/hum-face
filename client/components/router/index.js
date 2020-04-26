@@ -1,26 +1,31 @@
 import React, { useEffect } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import lazyloader from './lazyloader'
 
 const CoreRouter = props => {
   const { menus } = props
-  useEffect(() => {
-    return () => {}
-  }, [])
 
   const routes = () => {
     return menus.map(pages =>
-      pages.children.map(page => (
-        <Route
-          key={page.id}
-          children={page.children}
-          component={lazyloader(() => import(`pages${page.ppath}`))}
-          path={`${page.ppath}`}
-        />
-      ))
+      pages.children.map(page => {
+        // console.log(pathRoute, '========pathRoute=======pathRoute')
+        return (
+          <Route
+            key={page.ppath}
+            menu={page.children}
+            component={lazyloader(() => import(`pages/${page.ppath}`))}
+            path={`/${page.ppath}`}
+          />
+        )
+      })
     )
   }
 
-  return <Switch>{routes()}</Switch>
+  return (
+    <Switch>
+      {routes()}
+      <Redirect to="/setting" />
+    </Switch>
+  )
 }
 export default CoreRouter
