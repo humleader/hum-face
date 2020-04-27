@@ -1,17 +1,17 @@
-import ListTable from '../components'
+import ListTable from '../components/login-list'
 import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
-  const user = state.user
+  const log = state.log
   return {
-    user
+    log
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     action: {
-      ...dispatch.user
+      ...dispatch.log
     }
   }
 }
