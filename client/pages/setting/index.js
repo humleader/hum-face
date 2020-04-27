@@ -9,13 +9,13 @@ const Setting = props => {
   const routes = () => {
     return menu.map(page => {
       let tempPath = `${page.path}`
-      tempPath = tempPath.replace('/setting/', '')
+      tempPath = tempPath.replace('/setting', 'setting')
 
       return (
         <Route
           key={page.path}
           exact
-          component={lazyloader(() => import(`pages/setting/page/${tempPath}`))}
+          component={lazyloader(() => import(`pages/${tempPath}`))}
           path={`${page.path}`}
         />
       )

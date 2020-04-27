@@ -9,13 +9,13 @@ const Log = props => {
   const routes = () => {
     return menu.map(page => {
       let tempPath = `${page.path}`
-      tempPath = tempPath.replace('/log/', '')
+      tempPath = tempPath.replace('/log', 'log')
 
       return (
         <Route
           key={page.path}
           exact
-          component={lazyloader(() => import(`pages/log/page/${tempPath}`))}
+          component={lazyloader(() => import(`pages/${tempPath}`))}
           path={`${page.path}`}
         />
       )
