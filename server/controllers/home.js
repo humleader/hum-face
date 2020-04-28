@@ -1,12 +1,4 @@
-const {
-  baseURI,
-  appCode,
-  apiPrefix,
-  pageTitle,
-  version,
-  layout,
-  smallScreen
-} = require('utils/config')
+const { baseURI, appCode, apiPrefix, pageTitle } = require('utils/config')
 // 获取用户列表
 
 const env = process.env.NODE_ENV || 'development'
@@ -46,11 +38,7 @@ async function getConfig(ctx) {
     // 系统编号
     appCode,
     // 用户信息
-    userInfo,
-    env,
-    version,
-    layout,
-    smallScreen
+    userInfo
   }
 }
 

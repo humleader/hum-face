@@ -6,10 +6,14 @@ import lazyloader from 'components/router/lazyloader'
 const Setting = props => {
   const { menu = [] } = props
 
+  const RedirectMenu = menu[0]
+
+  const pPath = 'setting'
+
   const routes = () => {
     return menu.map(page => {
       let tempPath = `${page.path}`
-      tempPath = tempPath.replace('/setting', 'setting')
+      tempPath = tempPath.replace(`/${pPath}`, pPath)
 
       return (
         <Route
@@ -25,7 +29,7 @@ const Setting = props => {
   return (
     <Switch>
       {routes()}
-      <Redirect to="/setting/user" />
+      <Redirect to={`${RedirectMenu.path}`} />
     </Switch>
   )
 }

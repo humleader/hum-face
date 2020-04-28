@@ -1,10 +1,9 @@
+const UserService = require('services/user')
 module.exports = class {
   findAndCountAll(params) {
-    const { User } = global.M
-
     const { where, curPage = 1, pageSize = 20, ...rest } = params
 
-    return User.findAndCountAll({
+    return UserService.findAndCountAll({
       where,
       limit: +pageSize,
       offset: (+curPage - 1) * +pageSize,
@@ -13,32 +12,22 @@ module.exports = class {
   }
 
   findAll(params) {
-    const { User } = global.M
-
-    return User.findAll(params)
+    return UserService.findAll(params)
   }
 
   create(params, options = {}) {
-    const { User } = global.M
-
-    return User.create(params, options)
+    return UserService.create(params, options)
   }
 
   findOne(params) {
-    const { User } = global.M
-
-    return User.findOne(params)
+    return UserService.findOne(params)
   }
 
   update(params, options = {}) {
-    const { User } = global.M
-
-    return User.update(params, options)
+    return UserService.update(params, options)
   }
 
   destroy(params) {
-    const { User } = global.M
-
-    return User.destroy(params)
+    return UserService.destroy(params)
   }
 }
