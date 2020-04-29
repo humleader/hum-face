@@ -1,12 +1,12 @@
 // 获取用户列表
-const User = require('daos/user')
+const UserDao = require('daos/user')
 
 module.exports = async ctx => {
-  const user = new User()
+  const userDao = new UserDao()
 
   const { userName, userPassword } = ctx.request.body
 
-  const userData = await user.findOne({
+  const userData = await userDao.findOne({
     where: {
       userName
     }

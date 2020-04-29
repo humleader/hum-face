@@ -1,15 +1,20 @@
 import im from 'immutable'
 import axios from 'common/axios'
-const { userInfo } = window.__config__
+
+const getDefaultParams = () => {
+  return {
+    pageSize: 20,
+    curPage: 1
+  }
+}
 
 const initialState = im.fromJS({
-  userInfo: {
-    userName: localStorage.getItem('userName'),
-    userAliasName: localStorage.getItem('userAliasName'),
-    companyName: localStorage.getItem('companyName'),
-    ...userInfo
-  },
-  list: []
+  list: {
+    loading: false,
+    params: getDefaultParams(),
+    defaultParams: getDefaultParams(),
+    dataSource: []
+  }
 })
 
 export default {
@@ -17,28 +22,17 @@ export default {
   reducers: {
     setUserName: (state, payload) => {
       return state.setIn(['userInfo', 'userName'], payload)
-    },
-    setUserAliasName: (state, payload) => {
-      return state.setIn(['userInfo', 'userAliasName'], payload)
-    },
-    setUserList: (state, payload) => {
-      return state.set('list', im.fromJS(payload))
-    },
-    setcompanyName: (state, payload) => {
-      return state.setIn(['userInfo', 'setcompanyName'], payload)
     }
   },
   effects: {
-    login(data, rootState) {
-      return axios.post('/user/login', data)
+    userPage(data, rootState) {
+      return axios.get('/user/page')
     },
-    async getUserList(data, rootState) {
-      const list = await axios.get('/user/list')
-      this.setUserList(list)
+    userUpsert(data, rootState) {
+      return axios.post('/user/upsert', { ...data })
     },
-    logout(data, rootState) {
-      localStorage.removeItem('_h_token')
-      location.href = '/hum/login'
+    userDelete(data, rootState) {
+      return axios.post('/user/delete', { ...data })
     }
   }
 }

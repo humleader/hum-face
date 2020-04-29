@@ -1,12 +1,12 @@
 // 获取用户列表
-const User = require('daos/user')
+const UserDao = require('daos/user')
 
 module.exports = async ctx => {
-  const user = new User()
+  const userDao = new UserDao()
 
   const { userName, userPassword, newPwd } = ctx.request.body
 
-  const userData = await user.findOne({
+  const userData = await userDao.findOne({
     where: {
       userName
     }
@@ -17,7 +17,7 @@ module.exports = async ctx => {
     // 判断前端传递的用户密码是否与数据库密码一致
     if (userData.userPassword === userPassword) {
       // 用户token
-      const res = await user.update(
+      const res = await userDao.update(
         {
           userPassword: newPwd
         },
