@@ -1,5 +1,5 @@
 import moment from 'moment'
-import _ from 'lodash'
+import isPlainObject from 'lodash/isPlainObject'
 
 export default {
   /**
@@ -18,7 +18,7 @@ export default {
       return params.map(value => this.parseParams(value, options)).filter(filterFunc)
     }
 
-    if (_.isPlainObject(params)) {
+    if (isPlainObject(params)) {
       const result = {}
 
       Object.keys(params)

@@ -38,7 +38,6 @@ function throwHttpError(message, code) {
   throw error
 }
 
-// 使用 bluebird 替换原生 Promise
 function fetchPromise(path, options) {
   return new Promise(resolve => {
     fetch(path, options).then(resolve)

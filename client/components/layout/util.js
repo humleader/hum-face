@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, Icon } from 'antd'
-import _ from 'lodash'
+import get from 'lodash/get'
 
 // 渲染菜单和子菜单
 export function renderMenu(menu, onSubMenu) {
@@ -51,7 +51,7 @@ function isHref(path) {
 
 // 获取菜单 url，如果不存在 path 获取第一个子节点的 url
 export const getChildPath = menu => {
-  return menu ? menu.path || getChildPath(_.get(menu, 'children[0]')) : ''
+  return menu ? menu.path || getChildPath(get(menu, 'children[0]')) : ''
 }
 
 // 深度优先树遍历 反向

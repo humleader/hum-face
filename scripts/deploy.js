@@ -13,22 +13,21 @@ const env = process.env.NODE_ENV || 'development'
 const pkgName = process.env.npm_package_name
 
 Promise.resolve()
-  .then(
-    Promise.coroutine(async () => {
-      // 启动开发服务器
-      if (env === 'development') {
-        const devServer = `${pkgName}-dev-server`
-        await execa.shell(`pm2 startOrRestart process.json --only ${devServer}`).then(ret => {
-          console.log(ret.stdout)
-        })
-      }
-
-      // 启动 Node 服务
-      await execa.shell(`pm2 startOrRestart process.json --only ${pkgName}-${env}`).then(ret => {
+  .then(async () => {
+    // 启动开发服务器
+    if (env === 'development') {
+      const devServer = `${pkgName}-dev-server`
+      await execa.shell(`pm2 startOrRestart process.json --only ${devServer}`).then(ret => {
         console.log(ret.stdout)
       })
+    }
+
+    // 启动 Node 服务
+    await execa.shell(`pm2 startOrRestart process.json --only ${pkgName}-${env}`).then(ret => {
+      console.log(ret.stdout)
     })
-  )
+    return Promise.resolve()
+  })
   .then(() => {
     const time = (Date.now() - startTime) / 1000
     console.log(`deploy success in ${time.toFixed(2)} s`)

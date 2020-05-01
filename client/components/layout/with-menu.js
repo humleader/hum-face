@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { get, omit } from 'lodash'
+import get from 'lodash/get'
+import omit from 'lodash/omit'
 
 import { getActiveMenu, getParents, getChildPath, getDisplayName } from './util'
 

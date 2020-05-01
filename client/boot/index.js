@@ -3,5 +3,4 @@
 import '../assets/index.less'
 
 import 'babel-polyfill'
-import './promise'
 import './unhandledrejection'

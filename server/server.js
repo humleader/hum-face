@@ -1,14 +1,5 @@
 require('app-module-path/register')
 
-const Promise = require('bluebird')
-
-Promise.config({
-  warnings: false,
-  longStackTraces: true
-})
-
-global.Promise = Promise
-
 const path = require('path')
 const Koa = require('koa')
 

@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const yaml = require('js-yaml')
 const fs = require('fs-extra')
@@ -24,7 +25,6 @@ const publicPath = `/${appName}/static/`
 const config = {
   mode: 'production',
   entry: {
-    vendor: ['react', 'lodash', 'react-router-dom', 'react-dom', 'immutable', 'moment'],
     app: './app',
     login: './login'
   },
@@ -45,10 +45,24 @@ const config = {
           test: /\.(css|less)(\?.*)?$/,
           chunks: 'all',
           enforce: true
+        },
+        common: {
+          minChunks: 3,
+          test: /\.(js)(\?.*)?$/,
+          name: 'common',
+          chunks: 'all'
+        },
+        antd: {
+          minChunks: 3,
+          test: /(antd)/,
+          priority: 100,
+          name: 'antd',
+          reuseExistingChunk: true
         }
       }
     },
     minimizer: [
+      // new BundleAnalyzerPlugin(),
       new UglifyJsPlugin({
         cache: true,
         parallel: true,
@@ -66,12 +80,12 @@ const config = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'public/index.html',
-      chunks: ['styles', 'vendor', 'app']
+      chunks: ['styles', 'common', 'app']
     }),
     new HtmlWebpackPlugin({
       filename: 'login.html',
       template: 'public/login.html',
-      chunks: ['styles', 'vendor', 'login']
+      chunks: ['styles', 'common', 'login']
     })
   ]
 }

@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Menu } from 'antd'
-import _ from 'lodash'
+import isEmpty from 'lodash/isEmpty'
 
 import { renderMenu } from '../util'
 
@@ -19,7 +19,7 @@ export default class Header extends React.Component {
   render() {
     const { selectedMenus, menus } = this.props
 
-    if (_.isEmpty(menus)) {
+    if (isEmpty(menus)) {
       return null
     }
 

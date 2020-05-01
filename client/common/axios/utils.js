@@ -1,5 +1,3 @@
-import Promise from 'bluebird'
-
 // 对比字符串
 function compareStrings(a, b, ignoreCase) {
   a = String(a)
