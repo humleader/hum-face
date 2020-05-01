@@ -38,7 +38,9 @@ async function getConfig(ctx) {
     // 系统编号
     appCode,
     // 用户信息
-    userInfo
+    userInfo,
+    // 环境
+    env
   }
 }
 

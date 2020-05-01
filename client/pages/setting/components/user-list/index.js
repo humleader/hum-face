@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
-import history from 'common/history'
 import moment from 'moment'
 import { Table, Divider } from 'antd'
+import history from 'common/history'
+import HumContainer from 'components/hum-container'
+import HumBreadcrumb from 'components/hum-breadcrumb'
 
 import './index.less'
 
@@ -68,16 +70,18 @@ const List = props => {
 
   return (
     <div className="page-user">
-      page-user
-      <Table
-        rowKey="id"
-        className="table-list"
-        loading={loading}
-        onRow={handleOnRowClick}
-        columns={columns}
-        dataSource={dataSource.rows || []}
-        pagination={false}
-      />
+      <HumBreadcrumb item="用户管理" />
+      <HumContainer>
+        <Table
+          rowKey="id"
+          className="table-list"
+          loading={loading}
+          onRow={handleOnRowClick}
+          columns={columns}
+          dataSource={dataSource.rows || []}
+          pagination={false}
+        />
+      </HumContainer>
     </div>
   )
 }

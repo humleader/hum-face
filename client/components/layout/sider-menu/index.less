@@ -9,7 +9,6 @@
   transition: all 0.2s;
   background: #FF4A5C;
   overflow: hidden;
-  margin-bottom: 4px;
 
   img {
     height: 32px;
@@ -25,8 +24,15 @@
     overflow: hidden;
   }
 }
+
 .iconfont {
   min-width: 14px;
   margin-right: 10px;
   font-size: 14px;
+}
+
+.ant-menu-inline-collapsed>.ant-menu-submenu>.ant-menu-submenu-title .iconfont+span {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
 }
