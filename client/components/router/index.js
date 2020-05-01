@@ -6,11 +6,9 @@ import MRoute from './m-route'
 const CoreRouter = props => {
   const { menus } = props
 
-  const RedirectMenu = menus[0]
-
   const routes = () => {
     return menus.map(pages =>
-      pages.children.map(page => {
+      pages.children.map((page, idx) => {
         return (
           <MRoute
             key={page.ppath}
@@ -26,7 +24,7 @@ const CoreRouter = props => {
   return (
     <Switch>
       {routes()}
-      <Redirect to={`/${RedirectMenu.ppath}`} />
+      <Redirect to="/setting" />
     </Switch>
   )
 }

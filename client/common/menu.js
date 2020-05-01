@@ -1,6 +1,6 @@
 const menus = [
   {
-    name: '示例代码',
+    name: 'Admin',
     icon: 'appstore-o',
     children: [
       {
