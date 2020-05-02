@@ -1,12 +1,16 @@
 const nodemailer = require('nodemailer')
+const config = require('utils/config')
+
+const { host, port, auth } = config.nodemailer
+
 const transporter = nodemailer.createTransport({
-  host: 'smtphm.qiye.163.com',
-  port: 465, // SMTP 端口
+  host: host,
+  port: port, // SMTP 端口
   secureConnection: true,
   auth: {
-    user: 'hr@humleader.com',
+    user: auth.user,
     // smtp授权码
-    pass: 'MrqEM5g6AzanPUeq'
+    pass: auth.pass
   }
 })
 module.exports = transporter
