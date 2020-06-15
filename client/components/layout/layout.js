@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Layout } from 'antd'
+import { connect } from 'react-redux'
 
 import './layout.less'
 
@@ -17,6 +18,7 @@ const AntdLayout = props => {
     className,
     appCode,
     openKeys,
+    action,
     onMenuClick,
     userInfo
   } = props
@@ -32,6 +34,7 @@ const AntdLayout = props => {
 
   useEffect(() => {
     setCollapsed(localStorage[collapsedKey] === 'true')
+    action.getUserList()
     return () => {}
   }, [])
 
@@ -49,10 +52,25 @@ const AntdLayout = props => {
       />
       <Layout>
         <PageHeader userInfo={userInfo} menus={mainMenu} selectedMenus={selectedMenus} />
-        <Layout.Content>{children}</Layout.Content>
+        <Layout.Content className="hum-content-container">{children}</Layout.Content>
       </Layout>
     </Layout>
   )
 }
 
-export default AntdLayout
+function mapStateToProps(state) {
+  const common = state.common
+  return {
+    common
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    action: {
+      ...dispatch.common
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AntdLayout)

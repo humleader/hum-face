@@ -11,5 +11,12 @@ module.exports = {
   '@btn-height-base': '28px',
   '@btn-height-lg': '36px',
   '@btn-height-sm': '24px',
-  '@border-radius-base': '2px'
+  '@input-height-base': '28px',
+  '@input-height-lg': '36px',
+  '@input-height-sm': '24px',
+  '@border-radius-base': '2px',
+  '@table-padding-vertical': '11px',
+  '@table-padding-vertical-md': '11px',
+  '@table-padding-horizontal': '16px',
+  '@table-padding-horizontal-md': '16px'
 }

@@ -1,15 +1,21 @@
 const UserService = require('services/user')
 const userService = new UserService()
 module.exports = class {
-  findAndCountAll(params) {
-    const { where, curPage = 1, pageSize = 20, ...rest } = params
+  async findAndCountAll(params) {
+    const { where, pageIndex = 1, pageSize = 20, ...rest } = params
 
-    return userService.findAndCountAll({
+    const { count, rows } = await userService.findAndCountAll({
       where,
       limit: +pageSize,
-      offset: (+curPage - 1) * +pageSize,
+      offset: (+pageIndex - 1) * +pageSize,
       ...rest
     })
+    return {
+      pageIndex: +pageIndex,
+      pageSize: +pageSize,
+      total: count,
+      list: rows || []
+    }
   }
 
   findAll(params) {

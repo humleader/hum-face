@@ -20,6 +20,7 @@ function getHeader(header, field) {
 function rejectHttpError(message, code) {
   const error = new Error(message)
   error.name = 'HttpError'
+  error.message = message
   if (code != null) {
     error.code = code
   }

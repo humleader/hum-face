@@ -6,7 +6,7 @@
   "scripts": {
     "start": "run-p dev server ",
     "start-test": "run-p server-test dev",
-    "server": "nodemon --inspect=9229 -e js,json,yaml -w config -w server server/server.js",
+    "server": "nodemon --inspect=9222 -e js,json,yaml -w config -w server server/server.js",
     "server-test": "cross-env NODE_ENV=test npm run server",
     "dev": "nodemon -w config -w scripts -w mock/mock-map.js -w client/theme scripts/server.js",
     "lint": "eslint . --fix --format codeframe",

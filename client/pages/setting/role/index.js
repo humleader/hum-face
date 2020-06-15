@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 
 function mapStateToProps(state) {
   const setting = state.setting
+  const common = state.common
   return {
+    common,
     setting
   }
 }

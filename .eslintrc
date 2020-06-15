@@ -17,6 +17,7 @@
   "rules": {
     "comma-dangle": "off",
     "no-console": "off",
+    "react/jsx-fragments": "off",
     "react/prop-types": "off",
     "prettier/prettier": [
       "error",
