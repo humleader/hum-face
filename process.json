@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "hum-face-staging",
+      "name": "face-staging",
       "script": "./server/server.js",
       "instances": "2",
       "exec_mode": "cluster",
@@ -12,9 +12,11 @@
       }
     },
     {
-      "name": "hum-face-production",
+      "name": "face-production",
       "script": "./server/server.js",
       "instances": "4",
+      "out_file": "../output/face/logs/app.log",
+      "error_file": "../output/face/logs/error.log",
       "exec_mode": "cluster",
       "max_memory_restart": "500M",
       "env": {

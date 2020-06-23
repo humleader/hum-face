@@ -9,6 +9,7 @@ module.exports = option => {
       port: config.redis.port,
       password: config.redis.password
     }),
+    prefix: 'KOA_HUM:',
     key: 'HUM_SESS', // cookie中此key的值就是sessionId
     cookie: {
       httpOnly: true, // 必启xss
