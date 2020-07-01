@@ -239,6 +239,7 @@ const QueryList = props => {
       <HumBreadcrumb item="用户管理" />
       <HumContainer className="user-container">
         <HumQuery
+          params={params}
           query={query}
           xForm={{
             formFields

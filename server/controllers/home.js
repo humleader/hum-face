@@ -25,9 +25,8 @@ function getInitState() {
 
 // 获取全局配置
 async function getConfig(ctx) {
-  let userInfo = {}
-  userInfo = {
-    ...ctx.session.user
+  const userInfo = {
+    ...(ctx.session ? ctx.session.user : {})
   }
 
   return {

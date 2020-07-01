@@ -1,24 +1,11 @@
 import im from 'immutable'
 import axios from 'common/axios'
 
-const getDefaultParams = () => {
-  return {
-    pageSize: 20,
-    curPage: 1
-  }
-}
-
 const initialState = im.fromJS({
   listSource: {},
   params: {
     pageSize: 20,
     pageIndex: 1
-  },
-  list: {
-    loading: false,
-    params: getDefaultParams(),
-    defaultParams: getDefaultParams(),
-    dataSource: []
   }
 })
 
@@ -39,7 +26,6 @@ export default {
     async query(params, rootState) {
       const data = await axios.get('/user/page', { params })
       this.listSource(data)
-      this.setParams(params)
       return data
     },
     userPage(data, rootState) {

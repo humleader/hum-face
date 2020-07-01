@@ -239,6 +239,7 @@ const QueryList = props => {
       <HumBreadcrumb item="权限管理" />
       <HumContainer className="power-container">
         <HumQuery
+          params={params}
           query={query}
           xForm={{
             formFields
