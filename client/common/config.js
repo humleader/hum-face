@@ -1,8 +1,9 @@
 import menus from './menu'
 
-const { baseURI, apiPrefix, appCode, userInfo, env } = window.__config__
+const { baseURI, apiPrefix, appCode, userInfo, env, pageTitle } = window.__config__
 
 export {
+  pageTitle,
   // 基础 URI
   baseURI,
   // ajax 请求前缀

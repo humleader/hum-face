@@ -1,22 +1,19 @@
 {
   "apps": [
     {
-      "name": "face-staging",
+      "name": "face-development",
       "script": "./server/server.js",
-      "instances": "2",
-      "exec_mode": "cluster",
+      "exec_mode": "fork",
       "max_memory_restart": "500M",
       "env": {
-        "NODE_ENV": "staging",
+        "NODE_ENV": "development",
         "BLUEBIRD_WARNINGS": 0
       }
     },
     {
       "name": "face-production",
       "script": "./server/server.js",
-      "instances": "4",
-      "out_file": "../output/face/logs/app.log",
-      "error_file": "../output/face/logs/error.log",
+      "instances": "2",
       "exec_mode": "cluster",
       "max_memory_restart": "500M",
       "env": {

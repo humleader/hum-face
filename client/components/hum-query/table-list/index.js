@@ -3,17 +3,27 @@ import { Table } from 'antd'
 import cn from 'classnames'
 
 const TableList = props => {
-  const { className, loading, dataSource, doSearch, params, columns, pagination, ...rest } = props
+  const {
+    className,
+    loading,
+    dataSource,
+    doSearch,
+    searchParams,
+    columns,
+    pagination,
+    ...rest
+  } = props
 
   let tempPagination = {
     total: dataSource.total,
-    pageSize: params.pageSize,
-    current: params.pageIndex,
+    pageSize: searchParams.pageSize,
+    current: searchParams.pageIndex,
     showSizeChanger: true,
     showQuickJumper: true,
     showTotal: total => `共 ${total} 条`,
-    onShowSizeChange: (pageIndex, pageSize) => doSearch({ ...params, pageIndex: 1, pageSize }),
-    onChange: (pageIndex, pageSize) => doSearch({ ...params, pageIndex, pageSize })
+    onShowSizeChange: (pageIndex, pageSize) =>
+      doSearch({ ...searchParams, pageIndex: 1, pageSize }),
+    onChange: (pageIndex, pageSize) => doSearch({ ...searchParams, pageIndex, pageSize })
   }
 
   tempPagination = !pagination

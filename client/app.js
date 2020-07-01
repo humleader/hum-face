@@ -17,10 +17,10 @@ import { models } from './store'
 
 import logo from './assets/images/logo.png'
 
-import { userInfo, menus, appCode } from 'common/config'
+import { userInfo, menus, appCode, pageTitle } from 'common/config'
 
 const RouteComponent = withLayout({
-  title: '统一登录平台',
+  title: pageTitle,
   appCode,
   userInfo,
   menus,

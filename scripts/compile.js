@@ -21,18 +21,15 @@ console.log(`using ${env} config`)
 
 const devIp = ip()[0]
 const root = path.join(__dirname, '..')
-const processPath = path.join(root, 'process.json')
 const viewsPath = path.join(root, 'server/views')
 const configPath = path.join(root, `config/webpack.config.${env}`)
 const appConfigPath = path.join(root, `config/${env}.app.yaml`)
 
 const config = require(configPath)
-const processJson = require(processPath)
 const appConfig = yaml.safeLoad(fs.readFileSync(appConfigPath))
 const serverConfig = appConfig.server
 
 const buildPath = config.output.path
-const pkgName = process.env.npm_package_name
 
 Promise.resolve()
   .then(() => {
@@ -40,18 +37,6 @@ Promise.resolve()
 
     // 清理 views && output.path
     return Promise.all([fs.removeAsync(viewsPath), fs.removeAsync(buildPath)])
-  })
-  .then(() => {
-    console.log('update process.json')
-
-    // 更新 process.json
-    processJson.apps.forEach(app => {
-      if (!app.name.startsWith(pkgName)) {
-        app.name = `${pkgName}-${app.name}`
-      }
-    })
-
-    return fs.writeJsonAsync(processPath, processJson)
   })
   .then(() => {
     console.log('webpack building...')

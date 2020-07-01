@@ -17,7 +17,7 @@ const HumBreadcrumb = props => {
             if (res.link) {
               return (
                 <Breadcrumb.Item key={idx}>
-                  <Link to="/template">{res.name}</Link>
+                  <Link to={res.link}>{res.name}</Link>
                 </Breadcrumb.Item>
               )
             } else {

@@ -31,6 +31,7 @@ async function getConfig(ctx) {
   }
 
   return {
+    pageTitle,
     // 基础 URI
     baseURI,
     // ajax 请求前缀

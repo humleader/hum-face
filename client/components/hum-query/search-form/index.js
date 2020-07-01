@@ -13,6 +13,7 @@ const SearchForm = props => {
     loading,
     doSearch,
     params,
+    searchParams,
     formFields = [],
     form,
     renderActions,
@@ -20,7 +21,7 @@ const SearchForm = props => {
     showReset = true
   } = props
 
-  const { getFieldDecorator, resetFields, getFieldsValue, setFieldsValue } = form
+  const { getFieldDecorator, getFieldsValue, setFieldsValue } = form
 
   const [expand, setExpand] = useState(false)
   const [offsetHeight, setOffsetHeight] = useState(0)
@@ -73,21 +74,15 @@ const SearchForm = props => {
   const handleSearch = e => {
     e && e.preventDefault()
     const values = getFieldsValue()
-    doSearch({ ...params, ...values })
+    doSearch({ ...searchParams, ...values, pageIndex: 1 })
   }
 
   const handleReset = () => {
-    const { pageIndex, pageSize } = params
-    resetFields()
-    const values = getFieldsValue()
     for (let i = 0; i < formFields.length; i++) {
       const formItem = formFields[i]
-      if (values[formItem.dataIndex]) {
-        setFieldsValue({ [formItem.dataIndex]: undefined })
-      }
+      setFieldsValue({ [formItem.dataIndex]: params[formItem.dataIndex] })
     }
-
-    doSearch({ pageIndex, pageSize })
+    doSearch(params)
   }
 
   const renderOptions = options => {
@@ -95,8 +90,8 @@ const SearchForm = props => {
       options &&
       options.map((item, idx) => {
         return (
-          <Option key={idx} value={item.codeName || item.id || item.value}>
-            {item.codeName || item.sName || item.userAliasName || item.label}
+          <Option key={idx} value={item.value}>
+            {item.label}
           </Option>
         )
       })

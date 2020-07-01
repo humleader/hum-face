@@ -3,27 +3,27 @@
 'use strict'
 
 const execa = require('execa')
+const fs = require('fs-extra')
+const yaml = require('js-yaml')
+const path = require('path')
 const Promise = require('bluebird')
 
 console.log('start deploying...')
 
 const startTime = Date.now()
 const env = process.env.NODE_ENV || 'development'
+const root = path.join(__dirname, '..')
 
-const pkgName = process.env.npm_package_name
+const appConfigPath = path.join(root, `config/${env}.app.yaml`)
+
+const appConfig = yaml.safeLoad(fs.readFileSync(appConfigPath))
+
+const appName = appConfig.appCode.toLowerCase()
 
 Promise.resolve()
   .then(async () => {
-    // 启动开发服务器
-    if (env === 'development') {
-      const devServer = `${pkgName}-dev-server`
-      await execa.shell(`pm2 startOrRestart process.json --only ${devServer}`).then(ret => {
-        console.log(ret.stdout)
-      })
-    }
-
     // 启动 Node 服务
-    await execa.shell(`pm2 startOrRestart process.json --only ${pkgName}-${env}`).then(ret => {
+    await execa.shell(`pm2 startOrRestart process.json --only ${appName}-${env}`).then(ret => {
       console.log(ret.stdout)
     })
     return Promise.resolve()

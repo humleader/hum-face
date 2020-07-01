@@ -8,19 +8,16 @@ import SearchForm from './search-form'
 import TableList from './table-list'
 
 const HumQuery = props => {
-  const { className, xTable, query, xForm, toolBar } = props
+  const { className, xTable, query, xForm, toolBar, params, historyParams } = props
 
   const [loading, setLoading] = useState(false)
-  const [params, setParams] = useState({
-    pageSize: xTable.pageSize,
-    pageIndex: xTable.pageIndex
-  })
+  const [searchParams, setSearchParams] = useState(params)
 
-  const doSearch = params => {
+  const doSearch = val => {
     setLoading(true)
-    query(params)
+    setSearchParams(val)
+    query(val)
       .then(res => {
-        setParams(params)
         setLoading(false)
       })
       .catch(res => {
@@ -30,15 +27,25 @@ const HumQuery = props => {
   }
 
   useEffect(() => {
-    doSearch(params)
+    if (!historyParams) {
+      doSearch(searchParams)
+    } else {
+      setSearchParams(historyParams || params)
+    }
     return () => {}
-  }, [])
+  }, [historyParams])
 
   return (
     <div className={cn(`hum-query`, className)}>
-      <SearchForm {...xForm} params={params} doSearch={doSearch} loading={loading} />
+      <SearchForm
+        {...xForm}
+        searchParams={searchParams}
+        params={params}
+        doSearch={doSearch}
+        loading={loading}
+      />
       {toolBar || null}
-      <TableList {...xTable} params={params} doSearch={doSearch} loading={loading} />
+      <TableList {...xTable} searchParams={searchParams} doSearch={doSearch} loading={loading} />
     </div>
   )
 }
