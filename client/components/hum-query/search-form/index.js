@@ -4,7 +4,7 @@ import { Form, Input, Button, Select, DatePicker } from 'antd'
 import debounce from 'lodash/debounce'
 
 const FormItem = Form.Item
-const Option = Select.Option
+const { Option, OptGroup } = Select
 const { MonthPicker, RangePicker } = DatePicker
 
 const SearchForm = props => {
@@ -89,6 +89,19 @@ const SearchForm = props => {
     return (
       options &&
       options.map((item, idx) => {
+        if (item.children) {
+          return (
+            <OptGroup key={`${item.value}${idx}`} label={item.name}>
+              {item.children.map(res => {
+                return (
+                  <Option key={res.id} value={res.id}>
+                    {res.name}
+                  </Option>
+                )
+              })}
+            </OptGroup>
+          )
+        }
         return (
           <Option key={idx} value={item.value}>
             {item.label}
@@ -102,14 +115,36 @@ const SearchForm = props => {
     switch (item.type) {
       case 'select':
         return (
-          <Select placeholder={item.placeholder} {...item.props} allowClear>
+          <Select
+            showSearch
+            optionFilterProp="children"
+            placeholder={item.placeholder}
+            allowClear
+            {...item.props}
+          >
             {renderOptions(item.options)}
           </Select>
         )
       case 'month':
-        return <MonthPicker placeholder={item.placeholder} {...item.props} allowClear />
+        return <MonthPicker placeholder={item.placeholder} allowClear {...item.props} />
       case 'date':
-        return <RangePicker format="YYYY-MM-DD" {...item.props} allowClear />
+        return (
+          <DatePicker
+            placeholder={item.placeholder}
+            format="YYYY-MM-DD"
+            allowClear
+            {...item.props}
+          />
+        )
+      case 'rangePicker':
+        return (
+          <RangePicker
+            placeholder={item.placeholder}
+            format="YYYY-MM-DD"
+            allowClear
+            {...item.props}
+          />
+        )
       case 'input':
       default:
         return <Input placeholder={item.placeholder} {...item.props} />
