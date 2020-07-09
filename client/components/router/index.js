@@ -15,7 +15,9 @@ const CoreRouter = props => {
         tempPath = tempPath.replace('/', '')
         return (
           <MRoute
-            key={page.ppath}
+            key={tempPath}
+            parentMenu={page}
+            pPath={tempPath}
             menu={page.children}
             component={lazyloader(() => import(`pages/${tempPath}`))}
             path={`/${tempPath}`}
