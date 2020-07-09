@@ -35,6 +35,7 @@ const AntdLayout = props => {
   useEffect(() => {
     setCollapsed(localStorage[collapsedKey] === 'true')
     action.getUserList()
+    action.queryRegions()
     return () => {}
   }, [])
 

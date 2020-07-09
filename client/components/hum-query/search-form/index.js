@@ -21,7 +21,7 @@ const SearchForm = props => {
     showReset = true
   } = props
 
-  const { getFieldDecorator, getFieldsValue, setFieldsValue } = form
+  const { getFieldDecorator, getFieldsValue, resetFields } = form
 
   const [expand, setExpand] = useState(false)
   const [offsetHeight, setOffsetHeight] = useState(0)
@@ -78,10 +78,7 @@ const SearchForm = props => {
   }
 
   const handleReset = () => {
-    for (let i = 0; i < formFields.length; i++) {
-      const formItem = formFields[i]
-      setFieldsValue({ [formItem.dataIndex]: params[formItem.dataIndex] })
-    }
+    resetFields()
     doSearch(params)
   }
 

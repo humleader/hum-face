@@ -91,7 +91,7 @@ const Login = props => {
       <div className="login-box">
         <div className="b-left">
           <p className="logo" />
-          <p className="name">禾优曼管理系统</p>
+          <p className="name">欢迎登录</p>
         </div>
         <div className="b-right">
           <div className="login-title">
