@@ -6,7 +6,8 @@ const initialState = im.fromJS({
   params: {
     pageSize: 20,
     pageIndex: 1
-  }
+  },
+  historyParams: undefined
 })
 
 export default {
@@ -17,6 +18,9 @@ export default {
     },
     setParams: (state, payload) => {
       return state.set('params', im.fromJS(payload))
+    },
+    setHistoryParams: (state, payload) => {
+      return state.set('historyParams', im.fromJS(payload))
     },
     setUserName: (state, payload) => {
       return state.setIn(['userInfo', 'userName'], payload)
