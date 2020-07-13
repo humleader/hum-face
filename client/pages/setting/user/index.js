@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import { connect } from 'react-redux'
-import { Divider, Button } from 'antd'
+import { Divider, Button, Switch } from 'antd'
 import { Link } from 'react-router-dom'
 
 import './index.less'
@@ -45,24 +45,46 @@ const QueryList = props => {
 
   const columns = [
     {
-      title: '姓名',
+      title: 'ID',
+      dataIndex: 'id'
+    },
+    {
+      title: '账户',
       dataIndex: 'userName'
     },
     {
-      title: '邮箱',
-      dataIndex: 'canEmail'
+      title: '昵称',
+      dataIndex: 'userAliasName'
+    },
+    {
+      title: '性别',
+      dataIndex: 'userSex'
     },
     {
       title: '手机',
-      dataIndex: 'canPhone'
+      dataIndex: 'userTel'
     },
     {
-      title: '目前职位',
-      dataIndex: 'canPosition'
-    },
-    {
-      title: '城市',
-      dataIndex: 'canCity'
+      title: '状态',
+      render: record => {
+        return (
+          <Switch
+            checkedChildren="启用"
+            unCheckedChildren="注销"
+            checked={record.recycleStatus}
+            onChange={() => {
+              action
+                .userUpsert({
+                  id: record.id,
+                  recycleStatus: record.recycleStatus ? 0 : 1
+                })
+                .then(() => {
+                  query(backParams)
+                })
+            }}
+          />
+        )
+      }
     },
     {
       title: '年龄',

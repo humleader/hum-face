@@ -49,13 +49,13 @@ app.use(tplRender(isDev))
 const staticServer = require('koa-static-cache')
 app.use(
   staticServer(path.join(__dirname, '../build'), {
-    maxage: 3600 * 24 * 30,
+    maxage: 1000 * 60 * 60 * 24 * 30,
     gzip: true
   })
 )
 app.use(
   staticServer(path.join(__dirname, './uploads'), {
-    maxage: 3600 * 24 * 30,
+    maxage: 1000 * 60 * 60 * 24 * 30,
     gzip: true
   })
 )

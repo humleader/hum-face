@@ -44,6 +44,10 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.STRING(10),
         field: 'finance'
       },
+      recycleStatus: {
+        type: DataTypes.INTEGER(8),
+        field: 'recycle_status'
+      },
       createTime: {
         type: DataTypes.DATE,
         field: 'create_time'
