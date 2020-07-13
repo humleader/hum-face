@@ -36,6 +36,7 @@ module.exports = class {
     return User.update(params, options)
   }
 
+  // 删除参数包含事务参数
   destroy(params) {
     const { User } = global.M
 

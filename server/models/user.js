@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
         field: 'user_address'
       },
       userSex: {
-        type: DataTypes.STRING(10),
+        type: DataTypes.INTEGER(8),
         field: 'user_sex'
       },
       status: {
@@ -43,6 +43,10 @@ module.exports = function(sequelize, DataTypes) {
       finance: {
         type: DataTypes.STRING(10),
         field: 'finance'
+      },
+      addUserId: {
+        type: DataTypes.INTEGER(20),
+        field: 'add_user_id'
       },
       recycleStatus: {
         type: DataTypes.INTEGER(8),

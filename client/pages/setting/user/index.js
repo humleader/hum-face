@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import moment from 'moment'
 import { connect } from 'react-redux'
-import { Divider, Button, Switch } from 'antd'
+import { Button, Switch } from 'antd'
 import { Link } from 'react-router-dom'
 
 import './index.less'
@@ -58,7 +57,10 @@ const QueryList = props => {
     },
     {
       title: '性别',
-      dataIndex: 'userSex'
+      dataIndex: 'userSex',
+      render: value => {
+        return value === 0 ? '男' : '女'
+      }
     },
     {
       title: '手机',
@@ -87,103 +89,70 @@ const QueryList = props => {
       }
     },
     {
-      title: '年龄',
-      dataIndex: 'canBirthday',
-      width: '80px',
-      render: item => {
-        let age
-        if (item && item.indexOf('-') !== -1) {
-          const text = moment(item, 'YYYY-MM-DD').fromNow()
-          age = parseInt(text, 10)
-        } else {
-          const text = moment(`${item}-12-31`, 'YYYY-MM-DD').fromNow()
-          age = parseInt(text, 10)
-        }
-        if (isNaN(age)) {
-          age = '未知'
-        } else {
-          age = age + '岁'
-        }
-        return age
-      }
-    },
-    {
-      title: '学历',
-      width: '80px',
-      dataIndex: 'canEducation'
-    },
-    {
       title: '创建人',
       dataIndex: 'addUserId',
       width: '80px',
-      render: item => {
-        return showName(item)
+      render: value => {
+        console.log(value)
+        return showName(value)
       }
     },
     {
       title: '操作',
       key: 'action',
-      width: '140px',
       render: (text, record) => {
         return (
-          <span>
-            <a
-              onClick={e => {
-                e.stopPropagation()
-                history.push(`/candidate/add/${record.id}`)
-              }}
-            >
-              编辑
-            </a>
-            <Divider type="vertical" />
-            <a
-              onClick={e => {
-                e.stopPropagation()
-                action.showModal(record)
-              }}
-            >
-              推荐项目
-            </a>
-          </span>
+          <a
+            onClick={e => {
+              e.stopPropagation()
+              history.push(`/candidate/add/${record.id}`)
+            }}
+          >
+            编辑
+          </a>
         )
       }
     }
   ]
   const formFields = [
     {
+      title: '账户',
+      type: 'input',
+      placeholder: '输入账户',
+      dataIndex: 'userName',
+      formOptions: {
+        initialValue: backParams.userName
+      }
+    },
+    {
+      title: '昵称',
+      type: 'input',
+      placeholder: '输入昵称',
+      dataIndex: 'userAliasName',
+      formOptions: {
+        initialValue: backParams.userAliasName
+      }
+    },
+    {
       title: '手机',
       type: 'input',
       placeholder: '输入手机',
-      dataIndex: 'canPhone',
+      dataIndex: 'userTel',
       formOptions: {
-        initialValue: backParams.canPhone
+        initialValue: backParams.userTel
       }
     },
     {
-      title: '职位',
-      type: 'input',
-      placeholder: '输入职位',
-      dataIndex: 'canPosition',
+      title: '状态',
+      type: 'select',
+      placeholder: '请选择状态',
+      dataIndex: 'recycleStatus',
+      options: [
+        { label: '启动', value: 1 },
+        { label: '注销', value: 0 }
+      ],
       formOptions: {
-        initialValue: backParams.canPosition
-      }
-    },
-    {
-      title: '姓名',
-      type: 'input',
-      placeholder: '输入姓名',
-      dataIndex: 'canName',
-      formOptions: {
-        initialValue: backParams.canName
-      }
-    },
-    {
-      title: '所在城市',
-      type: 'input',
-      placeholder: '所在城市',
-      dataIndex: 'canCity',
-      formOptions: {
-        initialValue: backParams.canCity
+        initialValue: backParams.recycleStatus
       }
     }
   ]

@@ -10,7 +10,7 @@ module.exports = config => {
     host: config.host,
     port: config.port,
     dialect: 'mysql',
-    logging: false,
+    logging: process.env.NODE_ENV !== 'production',
     timezone: '+08:00',
     pool: {
       max: 10
