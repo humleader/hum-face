@@ -7,12 +7,25 @@ const initialState = im.fromJS({
     pageSize: 20,
     pageIndex: 1
   },
+  userModal: {
+    visible: false,
+    record: {},
+    loading: false
+  },
   historyParams: undefined
 })
 
 export default {
   state: initialState,
   reducers: {
+    showUserModal: (state, payload = {}) => {
+      return state.update('userModal', modal =>
+        modal.set('visible', true).set('record', im.fromJS(payload))
+      )
+    },
+    hideUserModal: (state, payload) => {
+      return state.update('userModal', modal => modal.set('visible', false).set('loading', false))
+    },
     listSource: (state, payload) => {
       return state.set('listSource', im.fromJS(payload))
     },
