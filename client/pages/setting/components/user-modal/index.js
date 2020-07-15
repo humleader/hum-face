@@ -3,12 +3,12 @@ import { Modal, message, Input, Form } from 'antd'
 import './index.less'
 
 const formItemLayout = {
-  labelCol: { span: 6 },
-  wrapperCol: { span: 16 }
+  labelCol: { span: 4 },
+  wrapperCol: { span: 18 }
 }
 
 const UserModal = props => {
-  const { actions, form, modal } = props
+  const { action, form, modal } = props
 
   const { getFieldDecorator, validateFields } = form
   const { visible, record, loading } = modal
@@ -18,7 +18,7 @@ const UserModal = props => {
   }, [])
 
   const close = () => {
-    actions.close()
+    action.hideUserModal()
   }
 
   const onSubmit = () => {
@@ -52,6 +52,23 @@ const UserModal = props => {
             rules: [{ required: true, message: '请填写昵称' }]
           })(<Input placeholder="请输入昵称" />)}
         </Form.Item>
+
+        <Form.Item className="form-item" {...formItemLayout} label="账号">
+          {getFieldDecorator('name', {
+            initialValue: undefined,
+            getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
+            rules: [{ required: true, message: '请填写账号' }]
+          })(<Input placeholder="请输入账号" />)}
+        </Form.Item>
+
+        <Form.Item className="form-item" {...formItemLayout} label="账号">
+          {getFieldDecorator('name', {
+            initialValue: undefined,
+            getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
+            rules: [{ required: true, message: '请填写账号' }]
+          })(<Input placeholder="请输入账号" />)}
+        </Form.Item>
+
         <Form.Item className="form-item" {...formItemLayout} label="账号">
           {getFieldDecorator('name', {
             initialValue: undefined,

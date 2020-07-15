@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Button, Switch } from 'antd'
-import { Link } from 'react-router-dom'
 
 import './index.less'
 import history from 'common/history'
@@ -11,10 +10,13 @@ import HumBreadcrumb from 'components/hum-breadcrumb'
 import HumQuery from 'components/hum-query'
 import ToolBar from 'components/tool-bar'
 
+import UserModal from '../components/user-modal'
+
 const QueryList = props => {
   const { setting, action, common } = props
   const listSource = setting.get('listSource').toJS()
   const params = setting.get('params').toJS()
+  const userModal = setting.get('userModal').toJS()
   let historyParams = setting.get('historyParams')
   historyParams = historyParams && historyParams.toJS()
   const userList = common.get('userList').toJS()
@@ -169,8 +171,8 @@ const QueryList = props => {
           }}
           toolBar={
             <ToolBar>
-              <Button type="primary">
-                <Link to="/power/add">新增</Link>
+              <Button type="primary" onClick={action.showUserModal}>
+                新增
               </Button>
             </ToolBar>
           }
@@ -183,6 +185,7 @@ const QueryList = props => {
           }}
         />
       </HumContainer>
+      <UserModal modal={userModal} action={action} />
     </div>
   )
 }

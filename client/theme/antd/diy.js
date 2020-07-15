@@ -18,5 +18,9 @@ module.exports = {
   '@table-padding-vertical': '11px',
   '@table-padding-vertical-md': '11px',
   '@table-padding-horizontal': '16px',
-  '@table-padding-horizontal-md': '16px'
+  '@table-padding-horizontal-md': '16px',
+  '@modal-body-padding': '14px',
+  '@modal-header-bg': '#fff',
+  '@modal-footer-bg': '#F2F4F7',
+  '@form-item-margin-bottom': '10px'
 }

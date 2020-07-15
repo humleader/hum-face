@@ -19,6 +19,7 @@
     "no-console": "off",
     "react/jsx-fragments": "off",
     "react/prop-types": "off",
+    "react/jsx-handler-names": "off",
     "prettier/prettier": [
       "error",
       {
