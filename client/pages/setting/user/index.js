@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Button, Switch } from 'antd'
+import { Button, Switch, Divider, Popconfirm, message } from 'antd'
 
 import './index.less'
-import history from 'common/history'
 
 import HumContainer from 'components/hum-container'
 import HumBreadcrumb from 'components/hum-breadcrumb'
@@ -95,23 +94,41 @@ const QueryList = props => {
       dataIndex: 'addUserId',
       width: '80px',
       render: value => {
-        console.log(value)
         return showName(value)
       }
     },
     {
       title: '操作',
       key: 'action',
+      width: '130px',
       render: (text, record) => {
         return (
-          <a
-            onClick={e => {
-              e.stopPropagation()
-              history.push(`/candidate/add/${record.id}`)
-            }}
-          >
-            编辑
-          </a>
+          <div>
+            <a
+              onClick={e => {
+                e.stopPropagation()
+                action.showUserModal(record)
+              }}
+            >
+              编辑
+            </a>
+            <Divider type="vertical" />
+            <Popconfirm
+              placement="topRight"
+              title={<p>你确定要重置密码吗？</p>}
+              onConfirm={e => {
+                e.stopPropagation()
+                action
+                  .userUpsert({ id: record.id, userPassword: 'd7df83a1c841bbc2c2eda47a95acf317' })
+                  .then(res => {
+                    query(backParams)
+                    message.success('重置密码成功！')
+                  })
+              }}
+            >
+              <a href="javascript:;">重置密码</a>
+            </Popconfirm>
+          </div>
         )
       }
     }
@@ -171,7 +188,12 @@ const QueryList = props => {
           }}
           toolBar={
             <ToolBar>
-              <Button type="primary" onClick={action.showUserModal}>
+              <Button
+                type="primary"
+                onClick={() => {
+                  action.showUserModal()
+                }}
+              >
                 新增
               </Button>
             </ToolBar>
@@ -180,12 +202,11 @@ const QueryList = props => {
             columns,
             pageIndex: params.pageIndex,
             pageSize: params.pageSize,
-            // scroll: { x: 1800 },
             dataSource: listSource
           }}
         />
       </HumContainer>
-      <UserModal modal={userModal} action={action} />
+      <UserModal modal={userModal} action={action} params={backParams} />
     </div>
   )
 }

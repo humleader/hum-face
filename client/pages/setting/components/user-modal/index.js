@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
-import { Modal, message, Input, Form } from 'antd'
+import React from 'react'
+import { Modal, message, Input, Form, Select } from 'antd'
+import CryptoJS from 'crypto-js'
+
 import './index.less'
 
 const formItemLayout = {
@@ -7,15 +9,13 @@ const formItemLayout = {
   wrapperCol: { span: 18 }
 }
 
+const { Option } = Select
+
 const UserModal = props => {
-  const { action, form, modal } = props
+  const { action, form, modal, params } = props
 
   const { getFieldDecorator, validateFields } = form
-  const { visible, record, loading } = modal
-
-  useEffect(() => {
-    return () => {}
-  }, [])
+  const { visible, record } = modal
 
   const close = () => {
     action.hideUserModal()
@@ -24,8 +24,14 @@ const UserModal = props => {
   const onSubmit = () => {
     validateFields((errors, values) => {
       if (!errors) {
-        console.log(errors)
-        message.error('adfafd')
+        values.userPassword = values.userPassword
+          ? CryptoJS.MD5(values.userPassword).toString()
+          : ''
+        action.userUpsert({ ...record, ...values }).then(() => {
+          message.success(record.id ? '修改成功！' : '新增成功！')
+          close()
+          action.query(params)
+        })
       }
     })
   }
@@ -37,7 +43,6 @@ const UserModal = props => {
       className="user-modal"
       title={title}
       visible={visible}
-      confirmLoading={loading}
       width={440}
       onCancel={close}
       onOk={onSubmit}
@@ -46,35 +51,61 @@ const UserModal = props => {
     >
       <Form className="user-form">
         <Form.Item className="form-item" {...formItemLayout} label="昵称">
-          {getFieldDecorator('displayName', {
-            initialValue: undefined,
+          {getFieldDecorator('userAliasName', {
+            initialValue: record.userAliasName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
             rules: [{ required: true, message: '请填写昵称' }]
-          })(<Input placeholder="请输入昵称" />)}
+          })(<Input placeholder="请输入昵称，如：Anthony" />)}
         </Form.Item>
 
         <Form.Item className="form-item" {...formItemLayout} label="账号">
-          {getFieldDecorator('name', {
-            initialValue: undefined,
+          {getFieldDecorator('userName', {
+            initialValue: record.userName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
             rules: [{ required: true, message: '请填写账号' }]
+          })(<Input placeholder="请输入账号，公司邮箱地址" />)}
+        </Form.Item>
+
+        {record.id ? null : (
+          <Form.Item className="form-item" {...formItemLayout} label="密码">
+            {getFieldDecorator('userPassword', {
+              initialValue: record.userPassword,
+              getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
+              rules: []
+            })(<Input placeholder="可不填，默认hum123" />)}
+          </Form.Item>
+        )}
+
+        <Form.Item className="form-item" {...formItemLayout} label="性别">
+          {getFieldDecorator('userSex', {
+            initialValue: record.userSex,
+            rules: [{ required: true, message: '请选择性别' }]
+          })(
+            <Select placeholder="选择性别" allowClear>
+              <Option value={0}>男</Option>
+              <Option value={1}>女</Option>
+            </Select>
+          )}
+        </Form.Item>
+
+        <Form.Item className="form-item" {...formItemLayout} label="手机">
+          {getFieldDecorator('userTel', {
+            initialValue: record.userTel,
+            getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
+            rules: []
           })(<Input placeholder="请输入账号" />)}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="账号">
-          {getFieldDecorator('name', {
-            initialValue: undefined,
-            getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-            rules: [{ required: true, message: '请填写账号' }]
-          })(<Input placeholder="请输入账号" />)}
-        </Form.Item>
-
-        <Form.Item className="form-item" {...formItemLayout} label="账号">
-          {getFieldDecorator('name', {
-            initialValue: undefined,
-            getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-            rules: [{ required: true, message: '请填写账号' }]
-          })(<Input placeholder="请输入账号" />)}
+        <Form.Item className="form-item" {...formItemLayout} label="职能">
+          {getFieldDecorator('status', {
+            initialValue: record.status,
+            rules: [{ required: true, message: '请填写职能' }]
+          })(
+            <Select placeholder="选择职能" allowClear>
+              <Option value="0">业务人员</Option>
+              <Option value="1">支持人员</Option>
+            </Select>
+          )}
         </Form.Item>
       </Form>
     </Modal>

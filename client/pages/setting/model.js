@@ -9,8 +9,7 @@ const initialState = im.fromJS({
   },
   userModal: {
     visible: false,
-    record: {},
-    loading: false
+    record: {}
   },
   historyParams: undefined
 })
@@ -24,7 +23,7 @@ export default {
       )
     },
     hideUserModal: (state, payload) => {
-      return state.update('userModal', modal => modal.set('visible', false).set('loading', false))
+      return state.update('userModal', modal => modal.set('visible', false))
     },
     listSource: (state, payload) => {
       return state.set('listSource', im.fromJS(payload))
