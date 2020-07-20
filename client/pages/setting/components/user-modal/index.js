@@ -29,7 +29,8 @@ const UserModal = props => {
       if (!errors) {
         values.userPassword = values.userPassword
           ? CryptoJS.MD5(values.userPassword).toString()
-          : ''
+          : undefined
+
         action
           .userUpsert({ ...record, ...values })
           .then(() => {

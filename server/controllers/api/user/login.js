@@ -33,7 +33,11 @@ module.exports = async ctx => {
     // 判断前端传递的用户密码是否与数据库密码一致
     if (userData.userPassword === userPassword) {
       // 用户token
-      ctx.session.user = userData
+      ctx.session.user = {
+        ...userData.dataValues,
+        userPassword: undefined,
+        userTel: undefined
+      }
       ctx.body = {
         code: 0,
         data: '',
