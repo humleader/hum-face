@@ -4,7 +4,6 @@ module.exports = async ctx => {
 
   const { id, ...rest } = ctx.request.body
 
-  let userData
   if (!id) {
     const isExist = await userDao.findOne({
       where: {
@@ -16,20 +15,23 @@ module.exports = async ctx => {
         code: 1,
         error: '用户已存在！'
       }
-      return
+    } else {
+      rest.userPassword = rest.userPassword || 'd7df83a1c841bbc2c2eda47a95acf317'
+      const userData = await userDao.create(rest)
+      ctx.body = {
+        code: 0,
+        data: userData
+      }
     }
-    rest.userPassword = rest.userPassword || 'd7df83a1c841bbc2c2eda47a95acf317'
-    userData = await userDao.create(rest)
   } else {
-    userData = await userDao.update(rest, {
+    const userData = await userDao.update(rest, {
       where: {
         id
       }
     })
-  }
-
-  ctx.body = {
-    code: 0,
-    data: userData
+    ctx.body = {
+      code: 0,
+      data: userData
+    }
   }
 }

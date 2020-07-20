@@ -60,7 +60,7 @@ const QueryList = props => {
       title: '性别',
       dataIndex: 'userSex',
       render: value => {
-        return value === 0 ? '男' : '女'
+        return value === '0' ? '男' : '女'
       }
     },
     {
@@ -115,7 +115,13 @@ const QueryList = props => {
             <Divider type="vertical" />
             <Popconfirm
               placement="topRight"
-              title={<p>你确定要重置密码吗？</p>}
+              title={
+                <p>
+                  你确定要重置密码吗？
+                  <br />
+                  重置后的密码为：hum123
+                </p>
+              }
               onConfirm={e => {
                 e.stopPropagation()
                 action

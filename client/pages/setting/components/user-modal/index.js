@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Modal, message, Input, Form, Select } from 'antd'
 import CryptoJS from 'crypto-js'
 
@@ -17,21 +17,33 @@ const UserModal = props => {
   const { getFieldDecorator, validateFields } = form
   const { visible, record } = modal
 
+  const [loading, setLoading] = useState(false)
+
   const close = () => {
     action.hideUserModal()
   }
 
   const onSubmit = () => {
+    setLoading(true)
     validateFields((errors, values) => {
       if (!errors) {
         values.userPassword = values.userPassword
           ? CryptoJS.MD5(values.userPassword).toString()
           : ''
-        action.userUpsert({ ...record, ...values }).then(() => {
-          message.success(record.id ? '修改成功！' : '新增成功！')
-          close()
-          action.query(params)
-        })
+        action
+          .userUpsert({ ...record, ...values })
+          .then(() => {
+            message.success(record.id ? '修改成功！' : '新增成功！')
+            close()
+            action.query(params)
+            setLoading(false)
+          })
+          .catch(res => {
+            message.error(res.message)
+            setLoading(false)
+          })
+      } else {
+        setLoading(false)
       }
     })
   }
@@ -45,6 +57,7 @@ const UserModal = props => {
       visible={visible}
       width={440}
       onCancel={close}
+      confirmLoading={loading}
       onOk={onSubmit}
       maskClosable={false}
       destroyOnClose
@@ -62,8 +75,11 @@ const UserModal = props => {
           {getFieldDecorator('userName', {
             initialValue: record.userName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-            rules: [{ required: true, message: '请填写账号' }]
-          })(<Input placeholder="请输入账号，公司邮箱地址" />)}
+            rules: [
+              { required: true, message: '请填写账号' },
+              { type: 'email', message: '请填入邮箱' }
+            ]
+          })(<Input disabled={!!record.id} placeholder="请输入账号，公司邮箱地址" />)}
         </Form.Item>
 
         {record.id ? null : (
@@ -82,8 +98,8 @@ const UserModal = props => {
             rules: [{ required: true, message: '请选择性别' }]
           })(
             <Select placeholder="选择性别" allowClear>
-              <Option value={0}>男</Option>
-              <Option value={1}>女</Option>
+              <Option value="0">男</Option>
+              <Option value="1">女</Option>
             </Select>
           )}
         </Form.Item>

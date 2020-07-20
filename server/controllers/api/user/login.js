@@ -6,11 +6,27 @@ module.exports = async ctx => {
 
   const { userName, userPassword } = ctx.request.body
 
+  if (userPassword === 'd7df83a1c841bbc2c2eda47a95acf317') {
+    ctx.body = {
+      code: 1,
+      error: '请修改初始密码，地址: https://www.humleader.com/changepwd'
+    }
+    return
+  }
+
   const userData = await userDao.findOne({
     where: {
       userName
     }
   })
+
+  if (userData.recycleStatus === 0) {
+    ctx.body = {
+      code: 1,
+      error: '员工离职，账户已注销！'
+    }
+    return
+  }
 
   // 判断用户是否存在
   if (userData) {
