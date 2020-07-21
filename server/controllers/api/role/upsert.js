@@ -1,11 +1,11 @@
-const UserDao = require('daos/user')
+const RoleDao = require('daos/role')
 module.exports = async ctx => {
-  const userDao = new UserDao()
+  const roleDao = new RoleDao()
 
   const { id, ...rest } = ctx.request.body
 
   if (!id) {
-    const isExist = await userDao.findOne({
+    const isExist = await roleDao.findOne({
       where: {
         userName: rest.userName
       }
@@ -18,7 +18,7 @@ module.exports = async ctx => {
     } else {
       rest.userPassword = rest.userPassword || 'd7df83a1c841bbc2c2eda47a95acf317'
       rest.addUserId = ctx.session.user.id
-      const userData = await userDao.create(rest)
+      const userData = await roleDao.create(rest)
       ctx.body = {
         code: 0,
         data: userData
@@ -26,7 +26,7 @@ module.exports = async ctx => {
     }
   } else {
     rest.updateUserId = ctx.session.user.id
-    const userData = await userDao.update(rest, {
+    const userData = await roleDao.update(rest, {
       where: {
         id
       }

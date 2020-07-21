@@ -48,6 +48,10 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER(20),
         field: 'add_user_id'
       },
+      updateUserId: {
+        type: DataTypes.INTEGER(20),
+        field: 'update_user_id'
+      },
       recycleStatus: {
         type: DataTypes.INTEGER(8),
         field: 'recycle_status'

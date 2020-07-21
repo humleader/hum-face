@@ -1,48 +1,40 @@
 'use strict'
 module.exports = function(sequelize, DataTypes) {
-  const User = sequelize.define(
-    'User',
+  const Role = sequelize.define(
+    'Role',
     {
       id: {
         type: DataTypes.INTEGER(20).UNSIGNED,
         primaryKey: true,
         autoIncrement: true
       },
-      userName: {
-        type: DataTypes.STRING(45),
-        field: 'user_name'
+      roleCode: {
+        type: DataTypes.STRING(64),
+        field: 'role_code'
       },
-      userNamePinyin: {
-        type: DataTypes.STRING(45),
-        field: 'user_en_name'
+      roleName: {
+        type: DataTypes.STRING(128),
+        field: 'role_name'
       },
-      userAliasName: {
-        type: DataTypes.STRING(45),
-        field: 'user_alias_name'
+      roleType: {
+        type: DataTypes.INTEGER(2),
+        field: 'role_type'
       },
-      userPassword: {
-        type: DataTypes.STRING(45),
-        field: 'user_password'
+      roleDesc: {
+        type: DataTypes.TEXT,
+        field: 'role_desc'
       },
-      userTel: {
-        type: DataTypes.STRING(20),
-        field: 'user_tel'
+      userId: {
+        type: DataTypes.INTEGER(20),
+        field: 'user_id'
       },
-      userAddress: {
-        type: DataTypes.STRING(100),
-        field: 'user_address'
+      updateUserId: {
+        type: DataTypes.INTEGER(20),
+        field: 'update_user_id'
       },
-      userSex: {
-        type: DataTypes.STRING(10),
-        field: 'user_sex'
-      },
-      status: {
-        type: DataTypes.STRING(10),
-        field: 'status'
-      },
-      finance: {
-        type: DataTypes.STRING(10),
-        field: 'finance'
+      recycleStatus: {
+        type: DataTypes.INTEGER(8),
+        field: 'recycle_status'
       },
       createTime: {
         type: DataTypes.DATE,
@@ -54,9 +46,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: 'user'
+      tableName: 'role'
     }
   )
 
-  return User
+  return Role
 }
