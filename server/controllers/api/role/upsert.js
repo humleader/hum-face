@@ -18,22 +18,22 @@ module.exports = async ctx => {
     } else {
       rest.userPassword = rest.userPassword || 'd7df83a1c841bbc2c2eda47a95acf317'
       rest.addUserId = ctx.session.user.id
-      const userData = await roleDao.create(rest)
+      const resData = await roleDao.create(rest)
       ctx.body = {
         code: 0,
-        data: userData
+        data: resData
       }
     }
   } else {
     rest.updateUserId = ctx.session.user.id
-    const userData = await roleDao.update(rest, {
+    const resData = await roleDao.update(rest, {
       where: {
         id
       }
     })
     ctx.body = {
       code: 0,
-      data: userData
+      data: resData
     }
   }
 }

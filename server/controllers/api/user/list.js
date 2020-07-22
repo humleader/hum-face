@@ -3,7 +3,7 @@ module.exports = async ctx => {
   const userDao = new UserDao()
   const params = ctx.query
 
-  const userData = await userDao.findAll({
+  const resData = await userDao.findAll({
     where: {
       ...params
     }
@@ -11,6 +11,6 @@ module.exports = async ctx => {
 
   ctx.body = {
     code: 0,
-    data: userData
+    data: resData
   }
 }

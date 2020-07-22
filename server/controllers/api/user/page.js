@@ -26,7 +26,7 @@ module.exports = async ctx => {
     }
   }
 
-  const userData = await userDao.findAndCountAll({
+  const resData = await userDao.findAndCountAll({
     where: {
       ...rest,
       ...filter
@@ -38,6 +38,6 @@ module.exports = async ctx => {
 
   ctx.body = {
     code: 0,
-    data: userData
+    data: resData
   }
 }

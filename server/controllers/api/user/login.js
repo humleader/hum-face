@@ -14,13 +14,13 @@ module.exports = async ctx => {
     return
   }
 
-  const userData = await userDao.findOne({
+  const resData = await userDao.findOne({
     where: {
       userName
     }
   })
 
-  if (userData.recycleStatus === 0) {
+  if (resData.recycleStatus === 0) {
     ctx.body = {
       code: 1,
       error: '员工离职，账户已注销！'
@@ -29,12 +29,12 @@ module.exports = async ctx => {
   }
 
   // 判断用户是否存在
-  if (userData) {
+  if (resData) {
     // 判断前端传递的用户密码是否与数据库密码一致
-    if (userData.userPassword === userPassword) {
+    if (resData.userPassword === userPassword) {
       // 用户token
       ctx.session.user = {
-        ...userData.dataValues,
+        ...resData.dataValues,
         userPassword: undefined,
         userTel: undefined
       }

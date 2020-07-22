@@ -6,16 +6,16 @@ module.exports = async ctx => {
 
   const { userName, userPassword, newPwd } = ctx.request.body
 
-  const userData = await userDao.findOne({
+  const resData = await userDao.findOne({
     where: {
       userName
     }
   })
 
   // 判断用户是否存在
-  if (userData) {
+  if (resData) {
     // 判断前端传递的用户密码是否与数据库密码一致
-    if (userData.userPassword === userPassword) {
+    if (resData.userPassword === userPassword) {
       // 用户token
       const res = await userDao.update(
         {
@@ -23,7 +23,7 @@ module.exports = async ctx => {
         },
         {
           where: {
-            id: userData.id
+            id: resData.id
           }
         }
       )

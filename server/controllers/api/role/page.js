@@ -2,7 +2,7 @@ const RoleDao = require('daos/role')
 const { Op } = require('sequelize')
 
 module.exports = async ctx => {
-  const userDao = new RoleDao()
+  const roleDao = new RoleDao()
 
   const { pageIndex = 1, pageSize = 20, ...rest } = ctx.query
 
@@ -26,7 +26,7 @@ module.exports = async ctx => {
     }
   }
 
-  const userData = await userDao.findAndCountAll({
+  const resData = await roleDao.findAndCountAll({
     where: {
       ...rest,
       ...filter
@@ -38,6 +38,6 @@ module.exports = async ctx => {
 
   ctx.body = {
     code: 0,
-    data: userData
+    data: resData
   }
 }
