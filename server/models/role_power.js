@@ -1,32 +1,20 @@
 'use strict'
 module.exports = function(sequelize, DataTypes) {
-  const Role = sequelize.define(
-    'Role',
+  const RolePower = sequelize.define(
+    'RolePower',
     {
       id: {
         type: DataTypes.INTEGER(20).UNSIGNED,
         primaryKey: true,
         autoIncrement: true
       },
-      roleCode: {
-        type: DataTypes.STRING(64),
-        field: 'role_code'
-      },
-      roleName: {
-        type: DataTypes.STRING(128),
-        field: 'role_name'
-      },
-      userId: {
+      roleId: {
         type: DataTypes.INTEGER(20),
-        field: 'user_id'
+        field: 'role_id'
       },
-      updateUserId: {
+      powerId: {
         type: DataTypes.INTEGER(20),
-        field: 'update_user_id'
-      },
-      recycleStatus: {
-        type: DataTypes.INTEGER(8),
-        field: 'recycle_status'
+        field: 'power_id'
       },
       createTime: {
         type: DataTypes.DATE,
@@ -38,9 +26,8 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     {
-      tableName: 'role'
+      tableName: 'role_power'
     }
   )
-
-  return Role
+  return RolePower
 }
