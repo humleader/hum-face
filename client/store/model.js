@@ -22,7 +22,6 @@ export default {
       this.setUserList(list)
       return list
     },
-    // 查询行政区域
     async queryRegions(params, rootState) {
       const data = await axios.get('/regions/query')
       this.setRegionsDate(data)

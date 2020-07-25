@@ -33,9 +33,6 @@ export default {
     },
     setHistoryParams: (state, payload) => {
       return state.set('historyParams', im.fromJS(payload))
-    },
-    setUserName: (state, payload) => {
-      return state.setIn(['userInfo', 'userName'], payload)
     }
   },
   effects: {
@@ -43,9 +40,6 @@ export default {
       const data = await axios.get('/user/page', { params })
       this.listSource(data)
       return data
-    },
-    userPage(data, rootState) {
-      return axios.get('/user/page')
     },
     userUpsert(data, rootState) {
       return axios.post('/user/upsert', { ...data })

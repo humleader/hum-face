@@ -12,11 +12,11 @@ import ToolBar from 'components/tool-bar'
 import UserModal from '../components/user-modal'
 
 const QueryList = props => {
-  const { setting, action, common } = props
-  const listSource = setting.get('listSource').toJS()
-  const params = setting.get('params').toJS()
-  const userModal = setting.get('userModal').toJS()
-  let historyParams = setting.get('historyParams')
+  const { user, action, common } = props
+  const listSource = user.get('listSource').toJS()
+  const params = user.get('params').toJS()
+  const userModal = user.get('userModal').toJS()
+  let historyParams = user.get('historyParams')
   historyParams = historyParams && historyParams.toJS()
   const userList = common.get('userList').toJS()
 
@@ -218,18 +218,18 @@ const QueryList = props => {
 }
 
 function mapStateToProps(state) {
-  const setting = state.setting
+  const user = state.user
   const common = state.common
   return {
     common,
-    setting
+    user
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     action: {
-      ...dispatch.setting
+      ...dispatch.user
     }
   }
 }
