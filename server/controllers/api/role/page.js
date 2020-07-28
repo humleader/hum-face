@@ -7,22 +7,16 @@ module.exports = async ctx => {
   const { pageIndex = 1, pageSize = 20, ...rest } = ctx.query
 
   const filter = {}
-  const { userName, userTel, userAliasName } = rest
+  const { userName, roleCode } = rest
 
   if (userName) {
     filter.userName = {
       [Op.like]: `%${userName}%`
     }
   }
-  if (userTel) {
-    filter.userTel = {
-      [Op.like]: `%${userTel}%`
-    }
-  }
-
-  if (userAliasName) {
-    filter.userAliasName = {
-      [Op.like]: `%${userAliasName}%`
+  if (roleCode) {
+    filter.roleCode = {
+      [Op.like]: `%${roleCode}%`
     }
   }
 

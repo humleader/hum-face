@@ -10,8 +10,7 @@ const initialState = im.fromJS({
   userModal: {
     visible: false,
     record: {}
-  },
-  historyParams: undefined
+  }
 })
 
 export default {
@@ -30,9 +29,6 @@ export default {
     },
     setParams: (state, payload) => {
       return state.set('params', im.fromJS(payload))
-    },
-    setHistoryParams: (state, payload) => {
-      return state.set('historyParams', im.fromJS(payload))
     }
   },
   effects: {

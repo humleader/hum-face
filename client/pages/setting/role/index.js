@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Button, Switch, Divider, Popconfirm, message } from 'antd'
+import { Button } from 'antd'
 
 import './index.less'
 
@@ -9,26 +9,16 @@ import HumBreadcrumb from 'components/hum-breadcrumb'
 import HumQuery from 'components/hum-query'
 import ToolBar from 'components/tool-bar'
 
-import UserModal from '../components/user-modal'
+import RoleModal from '../components/role-modal'
 
 const QueryList = props => {
-  const { user, action, common } = props
-  const listSource = user.get('listSource').toJS()
-  const params = user.get('params').toJS()
-  const userModal = user.get('userModal').toJS()
-  let historyParams = user.get('historyParams')
-  historyParams = historyParams && historyParams.toJS()
+  const { role, action, common } = props
+  const listSource = role.get('listSource').toJS()
+  const params = role.get('params').toJS()
+  const roleModal = role.get('roleModal').toJS()
   const userList = common.get('userList').toJS()
 
   const [backParams, setBackParams] = useState({})
-
-  useEffect(() => {
-    if (historyParams) {
-      setBackParams(historyParams)
-      action.setHistoryParams(undefined)
-    }
-    return () => {}
-  }, [])
 
   const query = data => {
     setBackParams(data)
@@ -49,49 +39,16 @@ const QueryList = props => {
       dataIndex: 'id'
     },
     {
-      title: '账户',
-      dataIndex: 'userName'
+      title: '角色编码',
+      dataIndex: 'roleCode'
     },
     {
-      title: '昵称',
-      dataIndex: 'userAliasName'
-    },
-    {
-      title: '性别',
-      dataIndex: 'userSex',
-      render: value => {
-        return value === '0' ? '男' : '女'
-      }
-    },
-    {
-      title: '手机',
-      dataIndex: 'userTel'
-    },
-    {
-      title: '状态',
-      render: record => {
-        return (
-          <Switch
-            checkedChildren="启用"
-            unCheckedChildren="注销"
-            checked={record.recycleStatus}
-            onChange={() => {
-              action
-                .userUpsert({
-                  id: record.id,
-                  recycleStatus: record.recycleStatus ? 0 : 1
-                })
-                .then(() => {
-                  query(backParams)
-                })
-            }}
-          />
-        )
-      }
+      title: '角色名称',
+      dataIndex: 'roleName'
     },
     {
       title: '创建人',
-      dataIndex: 'addUserId',
+      dataIndex: 'userId',
       width: '80px',
       render: value => {
         return showName(value)
@@ -100,40 +57,18 @@ const QueryList = props => {
     {
       title: '操作',
       key: 'action',
-      width: '130px',
+      width: '80px',
       render: (text, record) => {
         return (
           <div>
             <a
               onClick={e => {
                 e.stopPropagation()
-                action.showUserModal(record)
+                action.showRoleModal(record)
               }}
             >
               编辑
             </a>
-            <Divider type="vertical" />
-            <Popconfirm
-              placement="topRight"
-              title={
-                <p>
-                  你确定要重置密码吗？
-                  <br />
-                  重置后的密码为：hum123
-                </p>
-              }
-              onConfirm={e => {
-                e.stopPropagation()
-                action
-                  .userUpsert({ id: record.id, userPassword: 'd7df83a1c841bbc2c2eda47a95acf317' })
-                  .then(res => {
-                    query(backParams)
-                    message.success('重置密码成功！')
-                  })
-              }}
-            >
-              <a href="javascript:;">重置密码</a>
-            </Popconfirm>
           </div>
         )
       }
@@ -143,49 +78,27 @@ const QueryList = props => {
     {
       title: '账户',
       type: 'input',
-      placeholder: '输入账户',
-      dataIndex: 'userName',
+      placeholder: '输入角色编码',
+      dataIndex: 'roleCode',
       formOptions: {
-        initialValue: backParams.userName
+        initialValue: backParams.roleCode
       }
     },
     {
       title: '昵称',
       type: 'input',
-      placeholder: '输入昵称',
-      dataIndex: 'userAliasName',
+      placeholder: '输入角色名称',
+      dataIndex: 'roleName',
       formOptions: {
-        initialValue: backParams.userAliasName
-      }
-    },
-    {
-      title: '手机',
-      type: 'input',
-      placeholder: '输入手机',
-      dataIndex: 'userTel',
-      formOptions: {
-        initialValue: backParams.userTel
-      }
-    },
-    {
-      title: '状态',
-      type: 'select',
-      placeholder: '请选择状态',
-      dataIndex: 'recycleStatus',
-      options: [
-        { label: '启动', value: 1 },
-        { label: '注销', value: 0 }
-      ],
-      formOptions: {
-        initialValue: backParams.recycleStatus
+        initialValue: backParams.roleName
       }
     }
   ]
 
   return (
-    <div className="page-user">
-      <HumBreadcrumb item="用户管理" />
-      <HumContainer className="user-container">
+    <div className="page-role">
+      <HumBreadcrumb item="角色管理" />
+      <HumContainer className="role-container">
         <HumQuery
           params={params}
           query={query}
@@ -197,7 +110,7 @@ const QueryList = props => {
               <Button
                 type="primary"
                 onClick={() => {
-                  action.showUserModal()
+                  action.showRoleModal()
                 }}
               >
                 新增
@@ -212,24 +125,24 @@ const QueryList = props => {
           }}
         />
       </HumContainer>
-      <UserModal modal={userModal} action={action} params={backParams} />
+      <RoleModal modal={roleModal} action={action} params={backParams} />
     </div>
   )
 }
 
 function mapStateToProps(state) {
-  const user = state.user
+  const role = state.role
   const common = state.common
   return {
     common,
-    user
+    role
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     action: {
-      ...dispatch.user
+      ...dispatch.role
     }
   }
 }

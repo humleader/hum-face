@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Switch, Divider, Popconfirm, message } from 'antd'
 
@@ -16,19 +16,9 @@ const QueryList = props => {
   const listSource = user.get('listSource').toJS()
   const params = user.get('params').toJS()
   const userModal = user.get('userModal').toJS()
-  let historyParams = user.get('historyParams')
-  historyParams = historyParams && historyParams.toJS()
   const userList = common.get('userList').toJS()
 
   const [backParams, setBackParams] = useState({})
-
-  useEffect(() => {
-    if (historyParams) {
-      setBackParams(historyParams)
-      action.setHistoryParams(undefined)
-    }
-    return () => {}
-  }, [])
 
   const query = data => {
     setBackParams(data)

@@ -7,17 +7,16 @@ module.exports = async ctx => {
   if (!id) {
     const isExist = await roleDao.findOne({
       where: {
-        userName: rest.userName
+        roleCode: rest.roleCode
       }
     })
     if (isExist) {
       ctx.body = {
         code: 1,
-        error: '用户已存在！'
+        error: '编码已存在！'
       }
     } else {
-      rest.userPassword = rest.userPassword || 'd7df83a1c841bbc2c2eda47a95acf317'
-      rest.addUserId = ctx.session.user.id
+      rest.userId = ctx.session.user.id
       const resData = await roleDao.create(rest)
       ctx.body = {
         code: 0,

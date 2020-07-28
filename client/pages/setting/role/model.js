@@ -7,45 +7,41 @@ const initialState = im.fromJS({
     pageSize: 20,
     pageIndex: 1
   },
-  userModal: {
+  roleModal: {
     visible: false,
     record: {}
-  },
-  historyParams: undefined
+  }
 })
 
 export default {
   state: initialState,
   reducers: {
-    showUserModal: (state, payload = {}) => {
-      return state.update('userModal', modal =>
+    showRoleModal: (state, payload = {}) => {
+      return state.update('roleModal', modal =>
         modal.set('visible', true).set('record', im.fromJS(payload))
       )
     },
-    hideUserModal: (state, payload) => {
-      return state.update('userModal', modal => modal.set('visible', false))
+    hideRoleModal: (state, payload) => {
+      return state.update('roleModal', modal => modal.set('visible', false))
     },
     listSource: (state, payload) => {
       return state.set('listSource', im.fromJS(payload))
     },
     setParams: (state, payload) => {
       return state.set('params', im.fromJS(payload))
-    },
-    setHistoryParams: (state, payload) => {
-      return state.set('historyParams', im.fromJS(payload))
     }
   },
   effects: {
     async query(params, rootState) {
-      const data = await axios.get('/user/page', { params })
+      const data = await axios.get('/role/page', { params })
       this.listSource(data)
       return data
     },
-    userUpsert(data, rootState) {
-      return axios.post('/user/upsert', { ...data })
+    roleUpsert(data, rootState) {
+      return axios.post('/role/upsert', { ...data })
     },
-    userDelete(data, rootState) {
-      return axios.post('/user/delete', { ...data })
+    roleDelete(data, rootState) {
+      return axios.post('/role/delete', { ...data })
     }
   }
 }
