@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import im from 'immutable'
-import { Button, Switch, Divider, Popconfirm, Empty } from 'antd'
+import { Empty } from 'antd'
 
 import './index.less'
 
@@ -10,11 +10,13 @@ import HumContainer from 'components/hum-container'
 import HumBreadcrumb from 'components/hum-breadcrumb'
 import PowerTree from './power-tree'
 import TreeNodeItem from './tree-node-item'
+import PowerModal from './power-modal'
 
 const QueryList = props => {
   const { power, action } = props
 
   const treeSource = power.get('treeSource').toJS()
+  const powerModal = power.get('powerModal').toJS()
   const [curItem, setCurItem] = useState('')
 
   useEffect(() => {
@@ -26,9 +28,10 @@ const QueryList = props => {
     <div className="page-power">
       <HumBreadcrumb item="权限管理" />
       <HumContainer className="power-container">
-        <div className="config-tree">
+        <div className="power-tree">
           <PowerTree
             treeData={treeSource}
+            action={action}
             onSelectItem={item => {
               let tempConfig = item
               if (tempConfig) {
@@ -39,7 +42,7 @@ const QueryList = props => {
             }}
           />
         </div>
-        <div className="config-field">
+        <div className="power-field">
           {curItem ? (
             <TreeNodeItem item={curItem} />
           ) : (
@@ -55,6 +58,7 @@ const QueryList = props => {
           )}
         </div>
       </HumContainer>
+      <PowerModal modal={powerModal} action={action} />
     </div>
   )
 }

@@ -9,7 +9,7 @@ const { Search } = Input
 const confirm = Modal.confirm
 
 const SearchTree = props => {
-  const { onSelectItem, treeData, documentTypeUuid } = props
+  const { onSelectItem, treeData, action } = props
 
   const [expandedKeys, setExpandedKeys] = useState([])
   const [gData, setGData] = useState([])
@@ -388,7 +388,7 @@ const SearchTree = props => {
           type="primary"
           onClick={e => {
             e.stopPropagation()
-            opneCatalog({}, 'add')
+            action.showPowerModal()
           }}
         >
           <Icon type="plus" />

@@ -3,7 +3,7 @@ import axios from 'common/axios'
 
 const initialState = im.fromJS({
   treeSource: [],
-  userModal: {
+  powerModal: {
     visible: false,
     record: {}
   }
@@ -12,13 +12,13 @@ const initialState = im.fromJS({
 export default {
   state: initialState,
   reducers: {
-    showUserModal: (state, payload = {}) => {
-      return state.update('userModal', modal =>
+    showPowerModal: (state, payload = {}) => {
+      return state.update('powerModal', modal =>
         modal.set('visible', true).set('record', im.fromJS(payload))
       )
     },
-    hideUserModal: (state, payload) => {
-      return state.update('userModal', modal => modal.set('visible', false))
+    hidePowerModal: (state, payload) => {
+      return state.update('powerModal', modal => modal.set('visible', false))
     },
     treeSource: (state, payload) => {
       return state.set('treeSource', im.fromJS(payload))
