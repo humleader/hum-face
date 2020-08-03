@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Input, Form, Row, Col, Button, Select, message } from 'antd'
+import { Input, Form, Row, Col, Button, message, Select } from 'antd'
 
 import './index.less'
 
-import isJSON from 'common/utils/isJSON'
-
-const { TextArea } = Input
+const Option = Select.Option
 
 const TreeNodeItem = props => {
-  const { item, form, queryTree, documentTypeUuid } = props
+  const { item, form, action } = props
 
-  const { getFieldDecorator, setFieldsValue, resetFields } = form
+  const { getFieldDecorator, resetFields } = form
 
   const [loading, setLoading] = useState(false)
 
@@ -23,10 +21,6 @@ const TreeNodeItem = props => {
     labelCol: { span: 6 },
     wrapperCol: { span: 16 }
   }
-  const formItemLayout2 = {
-    labelCol: { span: 3 },
-    wrapperCol: { span: 20 }
-  }
 
   const isloading = val => {
     setLoading(val)
@@ -35,18 +29,12 @@ const TreeNodeItem = props => {
   const onSubmit = () => {
     isloading(true)
 
-    form.validateFields(async (errors, data) => {
+    form.validateFields((errors, values) => {
       if (!errors) {
-        const temp = {
-          ...item,
-          ...data,
-          config: typeof data.config !== 'string' ? JSON.stringify(data.config) : data.config,
-          children: undefined
-        }
-        service
-          .fieldUpdate(temp)
+        action
+          .powerUpsert({ ...item, ...values })
           .then(() => {
-            queryTree(documentTypeUuid)
+            action.powerTree()
             message.success('更新成功')
           })
           .catch(res => {
@@ -63,59 +51,50 @@ const TreeNodeItem = props => {
     <Form className="tree-node-item">
       <Row gutter={16}>
         <Col span={12}>
-          <Form.Item className="form-item" {...formItemLayout} label="字段名称">
-            {getFieldDecorator('displayName', {
-              initialValue: item.displayName,
+          <Form.Item {...formItemLayout} label="权限标识">
+            {getFieldDecorator('powerCode', {
+              initialValue: item.powerCode,
               getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
               rules: [
-                { required: true, message: '请填写字段名称' },
-                { max: 100, message: '长度不能超过100' }
+                { required: true, message: '请填写权限标识' },
+                { pattern: '^[0-9a-zA-Z_]{1,}$', message: '字母数字下划线组成' }
               ]
-            })(<Input placeholder="不能超过100个字符" />)}
+            })(<Input disabled={item.id} placeholder="请输入权限标识" />)}
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item className="form-item" {...formItemLayout} label="字段标识">
-            {getFieldDecorator('name', {
-              initialValue: item.name,
+          <Form.Item {...formItemLayout} label="权限名称">
+            {getFieldDecorator('powerName', {
+              initialValue: item.powerName,
               getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-              rules: [
-                { required: true, message: '请填写字段标识' },
-                { pattern: '^[0-9a-zA-Z_]{1,}$', message: '字母数字下划线组成' }
-              ]
-            })(<Input disabled={item.uuid} placeholder="请输入字段标识" />)}
+              rules: [{ required: true, message: '请填写权限名称' }]
+            })(<Input placeholder="请输入权限名称" />)}
           </Form.Item>
         </Col>
       </Row>
+
       <Row gutter={16}>
-        <Col span={24}>
-          <Form.Item className="form-item" {...formItemLayout2} label="报文路径">
-            {getFieldDecorator('path', {
-              initialValue: item.path,
-              getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-              rules: [{ required: true, message: '请填写报文路径' }]
-            })(<Input readOnly={item.uuid} placeholder="请输入报文路径" />)}
+        <Col span={12}>
+          <Form.Item {...formItemLayout} label="权限类型">
+            {getFieldDecorator('powerType', {
+              initialValue: item.powerType,
+              rules: [{ required: true, message: '请选择权限类型' }]
+            })(
+              <Select disabled placeholder="请选择权限类型">
+                <Option value="system">系统</Option>
+                <Option value="menu">菜单</Option>
+                <Option value="function">功能</Option>
+              </Select>
+            )}
           </Form.Item>
         </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={24}>
-          <Form.Item className="form-item" {...formItemLayout2} label="原始路径">
-            {getFieldDecorator('sourcePath', {
-              initialValue: item.sourcePath,
+        <Col span={12}>
+          <Form.Item {...formItemLayout} label="权限路径">
+            {getFieldDecorator('powerPath', {
+              initialValue: item.powerPath,
               getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-              rules: [{ required: true, message: '请填写原始路径' }]
-            })(<Input readOnly={item.uuid} placeholder="请输入原始路径" />)}
-          </Form.Item>
-        </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={24}>
-          <Form.Item className="form-item" {...formItemLayout2} label="字段描述">
-            {getFieldDecorator('description', {
-              initialValue: item.description,
-              rules: []
-            })(<TextArea rows={4} placeholder="请输入指标描述" />)}
+              rules: [{ required: true, message: '请填写权限路径' }]
+            })(<Input placeholder="请输入权限路径" />)}
           </Form.Item>
         </Col>
       </Row>

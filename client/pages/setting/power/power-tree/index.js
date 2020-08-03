@@ -1,41 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { Tree, Input, Button, Dropdown, Icon, Modal, message, Menu } from 'antd'
-import im from 'immutable'
+import { Tree, Input, Button, Icon } from 'antd'
 
 import './index.less'
 
 const { TreeNode } = Tree
 const { Search } = Input
-const confirm = Modal.confirm
+
+const levelMap = ['system', 'menu', 'function']
 
 const SearchTree = props => {
   const { onSelectItem, treeData, action } = props
 
   const [expandedKeys, setExpandedKeys] = useState([])
   const [gData, setGData] = useState([])
-  const [item, setItem] = useState()
-  const [editType, setEditType] = useState()
-  const [visible, setVisible] = useState(false)
+  const [curLevel, setCurLevel] = useState(null)
   const [dataList, setDataList] = useState([])
   const [searchValue, setSearchValue] = useState('')
-  const [displayIcon, setDisplayIcon] = useState(null)
   const [autoExpandParent, setAutoExpandParent] = useState(false)
 
-  const actions = {
-    refreshTree: () => {
-      props.queryTree(documentTypeUuid, true)
-    },
-    close: () => {
-      setVisible(false)
-    }
-  }
   const getParentKey = (key, tree) => {
     let parentKey
     for (let i = 0; i < tree.length; i++) {
       const node = tree[i]
       if (node.children) {
-        if (node.children.some(item => item.key === key)) {
-          parentKey = node.key
+        if (node.children.some(item => item.id === key)) {
+          parentKey = node.id
         } else if (getParentKey(key, node.children)) {
           parentKey = getParentKey(key, node.children)
         }
@@ -52,8 +41,6 @@ const SearchTree = props => {
       const generateData = data => {
         for (let i = 0; i < data.length; i++) {
           const node = data[i]
-          node.key = node.uuid
-          node.title = node.displayName
           list.push(node)
           if (node.children) {
             generateData(node.children)
@@ -63,7 +50,7 @@ const SearchTree = props => {
       generateData(temp)
       setGData(temp)
       setDataList(list)
-      setExpandedKeys(!expandedKeys.length ? [temp[0].key] : expandedKeys)
+      setExpandedKeys(!expandedKeys.length ? [temp[0].id] : expandedKeys)
     } else {
       setGData(temp)
       setDataList(list)
@@ -79,6 +66,9 @@ const SearchTree = props => {
 
   const onSelect = (selectedKeys, e) => {
     onSelectItem(selectedKeys.length ? e.node.props.item : '')
+    setCurLevel(selectedKeys.length ? e.node.props.level : 0)
+    setExpandedKeys(selectedKeys)
+    setAutoExpandParent(true)
   }
   let timeout
   const onChangeSearch = e => {
@@ -87,18 +77,14 @@ const SearchTree = props => {
     timeout = setTimeout(() => {
       if (!value) {
         setSearchValue('')
-        setExpandedKeys([treeData[0].key])
+        setExpandedKeys([treeData[0].id])
         setAutoExpandParent(false)
         return
       }
       const expandedKeys = dataList
         .map(item => {
-          if (
-            item.title.indexOf(value) > -1 ||
-            item.sourcePath.indexOf(value) > -1 ||
-            item.path.indexOf(value) > -1
-          ) {
-            return getParentKey(item.key, gData)
+          if (item.powerName.indexOf(value) > -1) {
+            return getParentKey(item.id, gData)
           }
           return null
         })
@@ -109,83 +95,13 @@ const SearchTree = props => {
     }, 100)
   }
 
-  const enterItem = id => {
-    setDisplayIcon(id)
-  }
-
-  const leaveItem = () => {
-    setDisplayIcon(null)
-  }
-
-  const opneCatalog = (item, type) => {
-    setItem(item)
-    setEditType(type)
-    setVisible(true)
-  }
-
-  const deleteAllConfirm = item => {
-    const ref = confirm({
-      title: '确定删除此字段吗？',
-      content: '温馨提示：该操作会删除该字段下所有字段，删除后无法恢复',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        // await service
-        //   .fieldDelete({ uuid: item.uuid })
-        //   .then(() => {
-        //     message.success('删除成功')
-        //     actions.refreshTree()
-        //     ref.destroy()
-        //   })
-        //   .catch(res => {
-        //     message.error(res.msg)
-        //   })
-      },
-      onCancel() {
-        ref.destroy()
-      }
-    })
-  }
-
-  const deleteConfirm = item => {
-    const ref = confirm({
-      title: '确定删除此字段吗？',
-      content: '温馨提示：字段删除后，无法恢复',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: async () => {
-        // await service
-        //   .fieldDelete({ uuid: item.uuid })
-        //   .then(() => {
-        //     message.success('删除成功')
-        //     actions.refreshTree()
-        //     ref.destroy()
-        //   })
-        //   .catch(res => {
-        //     message.error(res.msg)
-        //   })
-      },
-      onCancel() {
-        ref.destroy()
-      }
-    })
-  }
-
-  const cloneConfig = data => {
-    let tempConfig = im.List(data)
-    tempConfig = tempConfig.toJS()
-    return tempConfig
-  }
-
-  const loop = data =>
+  const loop = (data, level) =>
     data.map((item, idx) => {
-      const titleColor = item.title.indexOf(searchValue)
-      const sourcePath = item.sourcePath ? item.sourcePath.indexOf(searchValue) : 0
-      const path = item.path.indexOf(searchValue)
-      const beforeStr = item.title.substr(0, titleColor)
-      const afterStr = item.title.substr(titleColor + searchValue.length)
+      const titleColor = item.powerName.indexOf(searchValue)
+      const beforeStr = item.powerName.substr(0, titleColor)
+      const afterStr = item.powerName.substr(titleColor + searchValue.length)
 
-      let title =
+      const title =
         searchValue && titleColor !== -1 ? (
           <span>
             {beforeStr}
@@ -193,186 +109,33 @@ const SearchTree = props => {
             {afterStr}
           </span>
         ) : (
-          <span>{item.title}</span>
+          <span>{item.powerName}</span>
         )
-      if (searchValue && (sourcePath !== -1 || path !== -1)) {
-        title = <span style={{ color: '#f50' }}>{item.title}</span>
-      }
 
-      if (item.children) {
+      if (item.children && item.children.length) {
         return (
           <TreeNode
-            key={item.key}
+            key={item.id}
             item={item}
+            level={level}
             title={
-              <div
-                className="container-title"
-                onMouseEnter={() => enterItem(item.key)}
-                onMouseLeave={leaveItem}
-              >
+              <div className="container-title">
                 <div className="title-item">{title}</div>
-                <div
-                  className="btns"
-                  style={{ display: displayIcon === item.key ? 'block' : 'none' }}
-                >
-                  <Icon
-                    className={data.length - 1 === idx ? 'type-disable' : 'type-icon'}
-                    onClick={e => {
-                      e.stopPropagation()
-                      if (data.length - 1 === idx) {
-                        return
-                      }
-                      const tempData = cloneConfig(data)
-                      const down = tempData[idx + 1]
-                      tempData.splice(idx, 2, down, item)
-                      const uuids = tempData.map(res => res.uuid)
-                      // service.fieldReorder(uuids).then(() => {
-                      //   actions.refreshTree()
-                      // })
-                    }}
-                    type="down"
-                  />
-                  <Icon
-                    className={idx === 0 ? 'type-disable' : 'type-icon'}
-                    onClick={e => {
-                      e.stopPropagation()
-                      if (idx === 0) {
-                        return
-                      }
-                      const tempData = cloneConfig(data)
-                      const up = tempData[idx - 1]
-                      tempData.splice(idx - 1, 2, item, up)
-                      const uuids = tempData.map(res => res.uuid)
-                      // service.fieldReorder(uuids).then(() => {
-                      //   actions.refreshTree()
-                      // })
-                    }}
-                    type="up"
-                  />
-                  <Dropdown
-                    overlay={
-                      <Menu>
-                        <Menu.Item
-                          onClick={e => {
-                            e.domEvent.stopPropagation()
-                            opneCatalog(item, 'add')
-                          }}
-                        >
-                          添加
-                        </Menu.Item>
-                        <Menu.Item
-                          onClick={e => {
-                            e.domEvent.stopPropagation()
-                            opneCatalog(item, 'edit')
-                          }}
-                        >
-                          修改
-                        </Menu.Item>
-                        <Menu.Item
-                          onClick={e => {
-                            e.domEvent.stopPropagation()
-                            deleteAllConfirm(item)
-                          }}
-                        >
-                          删除
-                        </Menu.Item>
-                      </Menu>
-                    }
-                    placement="bottomRight"
-                  >
-                    <Icon className="type-icon" type="more" />
-                  </Dropdown>
-                </div>
               </div>
             }
           >
-            {loop(item.children)}
+            {loop(item.children, level + 1)}
           </TreeNode>
         )
       }
       return (
         <TreeNode
-          key={item.key}
+          key={item.id}
           item={item}
+          level={level}
           title={
-            <div
-              className="container-title"
-              onMouseEnter={() => enterItem(item.key)}
-              onMouseLeave={leaveItem}
-            >
+            <div className="container-title">
               <div className="title-item">{title}</div>
-              <div
-                className="btns"
-                style={{ display: displayIcon === item.key ? 'block' : 'none' }}
-              >
-                <Icon
-                  className={data.length - 1 === idx ? 'type-disable' : 'type-icon'}
-                  onClick={e => {
-                    e.stopPropagation()
-                    if (data.length - 1 === idx) {
-                      return
-                    }
-                    const tempData = cloneConfig(data)
-                    const down = tempData[idx + 1]
-                    tempData.splice(idx, 2, down, item)
-                    const uuids = tempData.map(res => res.uuid)
-                    // service.fieldReorder(uuids).then(() => {
-                    //   actions.refreshTree()
-                    // })
-                  }}
-                  type="down"
-                />
-                <Icon
-                  className={idx === 0 ? 'type-disable' : 'type-icon'}
-                  onClick={e => {
-                    e.stopPropagation()
-                    if (idx === 0) {
-                      return
-                    }
-                    const tempData = cloneConfig(data)
-                    const up = tempData[idx - 1]
-                    tempData.splice(idx - 1, 2, item, up)
-                    const uuids = tempData.map(res => res.uuid)
-                    // service.fieldReorder(uuids).then(() => {
-                    //   actions.refreshTree()
-                    // })
-                  }}
-                  type="up"
-                />
-                <Dropdown
-                  overlay={
-                    <Menu>
-                      <Menu.Item
-                        onClick={e => {
-                          e.domEvent.stopPropagation()
-                          opneCatalog(item, 'add')
-                        }}
-                      >
-                        添加
-                      </Menu.Item>
-                      <Menu.Item
-                        onClick={e => {
-                          e.domEvent.stopPropagation()
-                          opneCatalog(item, 'edit')
-                        }}
-                      >
-                        修改
-                      </Menu.Item>
-                      <Menu.Item
-                        onClick={e => {
-                          e.domEvent.stopPropagation()
-                          deleteConfirm(item)
-                        }}
-                      >
-                        删除
-                      </Menu.Item>
-                    </Menu>
-                  }
-                  placement="bottomRight"
-                >
-                  <Icon className="type-icon" type="more" />
-                </Dropdown>
-              </div>
             </div>
           }
         />
@@ -380,15 +143,16 @@ const SearchTree = props => {
     })
 
   return (
-    <div className="parameter-search-tree">
+    <div className="power-search-tree">
       <div className="left-header">
         <Search className="search-input" placeholder="搜索字段名称" onChange={onChangeSearch} />
         <Button
           className="search-btn"
+          disabled={curLevel !== null && curLevel === 2}
           type="primary"
           onClick={e => {
             e.stopPropagation()
-            action.showPowerModal()
+            action.showPowerModal({ powerType: levelMap[curLevel !== null ? curLevel + 1 : 0] })
           }}
         >
           <Icon type="plus" />
@@ -405,7 +169,7 @@ const SearchTree = props => {
         onSelect={onSelect}
         autoExpandParent={autoExpandParent}
       >
-        {loop(gData)}
+        {loop(gData, 0)}
       </Tree>
     </div>
   )

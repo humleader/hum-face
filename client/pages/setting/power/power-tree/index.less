@@ -1,115 +1,97 @@
-.parameter-search-tree {
-    height: 100%;
-    overflow: hidden;
+.power-search-tree {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+
+  .left-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 46px;
+    padding: 0 10px;
+    border-bottom: 1px solid #E1E6EE;
+
+    .search-input {
+      flex: 1;
+    }
+
+    .search-btn {
+      margin-left: 16px;
+    }
+  }
+
+  .tree-doc {
+    height: calc(~"100% - 56px");
     width: 100%;
+    padding: 10px;
+    overflow: auto;
+  }
 
-    .left-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 46px;
-        padding: 0 10px;
-        border-bottom: 1px solid #E1E6EE;
+  .tree-wrappper .ant-tree li {
+    padding: 0;
+    position: relative;
+  }
 
-        .search-input {
-            flex: 1;
+  .ant-tree li .ant-tree-node-content-wrapper {
+    width: calc(~"100% - 28px");
+    padding: 0;
+
+    .container-title {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      position: relative;
+      z-index: 10;
+      height: 24px;
+      font-size: 14px;
+
+      .title-item {
+        sup {
+          margin-left: 2px;
         }
-
-        .search-btn {
-            margin-left: 16px;
-        }
+      }
     }
+  }
 
-    .tree-doc {
-        height: calc(100% - 56px);
-        width: 100%;
-        padding: 10px;
-        overflow: auto;
-    }
+  .ant-tree.ant-tree-show-line.tree-doc li span.ant-tree-switcher-noop {
+    background: transparent;
+  }
 
-    .tree-wrappper .ant-tree li {
-        padding: 0;
-        position: relative;
-    }
+  .ant-tree.ant-tree-show-line.tree-doc li:before {
+    content: " ";
+    width: 1px;
+    border-left: 1px solid #d9d9d9;
+    height: 100%;
+    position: absolute;
+    left: 12px;
+    top: 0;
+    margin: 0;
+  }
 
-    .ant-tree li .ant-tree-node-content-wrapper {
-        width: calc(100% - 28px);
-        padding: 0;
+  .ant-tree.ant-tree-show-line.tree-doc li:first-child:before {
+    top: 6px;
+    height: calc(~"100% - 6px");
+  }
 
-        .container-title {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            position: relative;
-            z-index: 10;
-            height: 24px;
-            font-size: 14px;
-            color: #2E3341;
+  .ant-tree.ant-tree-show-line.tree-doc li:last-child:before {
+    height: 16px;
+  }
 
-            .title-item {
-                sup {
-                    margin-left: 2px;
-                }
-            }
-        }
+  .ant-tree.ant-tree-show-line.tree-doc li:first-child:last-child:before {
+    height: 10px;
+  }
 
-        .btns {
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-            transition: all 0.2s;
+  .ant-tree.ant-tree-show-line.tree-doc li .ant-tree-switcher-noop>i {
+    visibility: hidden;
+  }
 
-            .type-icon {
-                margin-left: 10px;
-                color: #08c;
-			}
-			.type-disable {
-                margin-left: 10px;
-                color: #c5c5c5;
-            }
-        }
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li span.ant-tree-switcher-noop {
-        background: transparent;
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li:before {
-        content: " ";
-        width: 1px;
-        border-left: 1px solid #d9d9d9;
-        height: 100%;
-        position: absolute;
-        left: 12px;
-        top: 0;
-        margin: 0;
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li:first-child:before {
-        top: 6px;
-        height: calc(100% - 6px);
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li:last-child:before {
-        height: 16px;
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li:first-child:last-child:before {
-        height: 10px;
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li .ant-tree-switcher-noop>i {
-        visibility: hidden;
-    }
-
-    .ant-tree.ant-tree-show-line.tree-doc li .ant-tree-switcher-noop:after {
-        content: " ";
-        height: 1px;
-        border-bottom: 1px solid #d9d9d9;
-        width: 10px;
-        position: absolute;
-        left: 12px;
-        top: 50%;
-        margin: 0;
-    }
+  .ant-tree.ant-tree-show-line.tree-doc li .ant-tree-switcher-noop:after {
+    content: " ";
+    height: 1px;
+    border-bottom: 1px solid #d9d9d9;
+    width: 10px;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    margin: 0;
+  }
 }

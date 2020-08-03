@@ -44,7 +44,7 @@ const QueryList = props => {
         </div>
         <div className="power-field">
           {curItem ? (
-            <TreeNodeItem item={curItem} />
+            <TreeNodeItem item={curItem} action={action} />
           ) : (
             <Empty
               image={empty}

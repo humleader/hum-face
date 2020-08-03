@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Modal, message, Input, Form, Select } from 'antd'
 
 import './index.less'
@@ -22,17 +22,16 @@ const PowerModal = props => {
     validateFields((errors, values) => {
       if (!errors) {
         action
-          .userUpsert({ ...record, ...values })
+          .powerUpsert({ ...record, ...values })
           .then(() => {
-            message.success(record.id ? '修改成功！' : '新增成功！')
+            message.success('新增成功！')
             close()
             action.powerTree()
-            setLoading(false)
           })
           .catch(res => {
             message.error(res.message)
-            setLoading(false)
           })
+        setLoading(false)
       } else {
         setLoading(false)
       }
@@ -49,7 +48,6 @@ const PowerModal = props => {
       className="power-modal"
       title="结构配置"
       visible={visible}
-      width={800}
       onCancel={close}
       confirmLoading={loading}
       onOk={onSubmit}
@@ -57,47 +55,44 @@ const PowerModal = props => {
       destroyOnClose
     >
       <Form className="catalog-form">
-        <Form.Item className="form-item" {...formItemLayout} label="字段名称">
+        <Form.Item {...formItemLayout} label="权限标识">
           {getFieldDecorator('powerCode', {
             initialValue: record.powerCode,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
             rules: [
-              { required: true, message: '请填写字段名称' },
-              { max: 100, message: '长度不能超过100' }
+              { required: true, message: '请填写权限标识' },
+              { pattern: '^[0-9a-zA-Z_]{1,}$', message: '字母数字下划线组成' }
             ]
-          })(<Input placeholder="不能超过100个字符" />)}
+          })(<Input disabled={record.id} placeholder="请输入权限标识" />)}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="字段标识">
+        <Form.Item {...formItemLayout} label="权限名称">
           {getFieldDecorator('powerName', {
             initialValue: record.powerName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-            rules: [
-              { required: true, message: '请填写字段标识' },
-              { pattern: '^[0-9a-zA-Z_]{1,}$', message: '字母数字下划线组成' }
-            ]
-          })(<Input placeholder="请输入字段标识" />)}
+            rules: [{ required: true, message: '请填写权限名称' }]
+          })(<Input placeholder="请输入权限名称" />)}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="字段标识">
+        <Form.Item {...formItemLayout} label="权限类型">
           {getFieldDecorator('powerType', {
             initialValue: record.powerType,
-            getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-            rules: [{ required: true, message: '请填写字段标识' }]
+            rules: [{ required: true, message: '请选择权限类型' }]
           })(
-            <Select placeholder="请输入字段标识">
-              <Option value="aaa">aaa</Option>
-              <Option value="aaa">aaa</Option>
+            <Select disabled placeholder="请选择权限类型">
+              <Option value="system">系统</Option>
+              <Option value="menu">菜单</Option>
+              <Option value="function">功能</Option>
             </Select>
           )}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="原始路径">
+        <Form.Item {...formItemLayout} label="权限路径">
           {getFieldDecorator('powerPath', {
             initialValue: record.powerPath,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
-            rules: [{ required: true, message: '请填写原始路径' }]
-          })(<Input placeholder="请输入原始路径" />)}
+            rules: [{ required: true, message: '请填写权限路径' }]
+          })(<Input placeholder="请输入权限路径" />)}
         </Form.Item>
       </Form>
     </Modal>

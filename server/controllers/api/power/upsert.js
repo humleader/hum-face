@@ -7,7 +7,7 @@ module.exports = async ctx => {
   if (!id) {
     const isExist = await powerDao.findOne({
       where: {
-        roleCode: rest.roleCode
+        powerCode: rest.powerCode
       }
     })
     if (isExist) {
