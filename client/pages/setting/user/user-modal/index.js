@@ -63,8 +63,8 @@ const UserModal = props => {
       maskClosable={false}
       destroyOnClose
     >
-      <Form className="user-form">
-        <Form.Item className="form-item" {...formItemLayout} label="昵称">
+      <Form>
+        <Form.Item {...formItemLayout} label="昵称">
           {getFieldDecorator('userAliasName', {
             initialValue: record.userAliasName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
@@ -72,7 +72,7 @@ const UserModal = props => {
           })(<Input placeholder="请输入昵称，如：Anthony" />)}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="账号">
+        <Form.Item {...formItemLayout} label="账号">
           {getFieldDecorator('userName', {
             initialValue: record.userName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
@@ -84,7 +84,7 @@ const UserModal = props => {
         </Form.Item>
 
         {record.id ? null : (
-          <Form.Item className="form-item" {...formItemLayout} label="密码">
+          <Form.Item {...formItemLayout} label="密码">
             {getFieldDecorator('userPassword', {
               initialValue: record.userPassword,
               getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
@@ -93,7 +93,7 @@ const UserModal = props => {
           </Form.Item>
         )}
 
-        <Form.Item className="form-item" {...formItemLayout} label="性别">
+        <Form.Item {...formItemLayout} label="性别">
           {getFieldDecorator('userSex', {
             initialValue: record.userSex,
             rules: [{ required: true, message: '请选择性别' }]
@@ -105,7 +105,7 @@ const UserModal = props => {
           )}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="手机">
+        <Form.Item {...formItemLayout} label="手机">
           {getFieldDecorator('userTel', {
             initialValue: record.userTel,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
@@ -113,7 +113,7 @@ const UserModal = props => {
           })(<Input placeholder="请输入账号" />)}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="职能">
+        <Form.Item {...formItemLayout} label="职能">
           {getFieldDecorator('status', {
             initialValue: record.status,
             rules: [{ required: true, message: '请填写职能' }]

@@ -17,7 +17,7 @@ const menus = [
             path: '/setting/role'
           },
           {
-            name: '权限管理',
+            name: '注册权限',
             path: '/setting/power'
           }
         ]

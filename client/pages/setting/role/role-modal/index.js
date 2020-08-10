@@ -57,7 +57,7 @@ const RoleModal = props => {
       destroyOnClose
     >
       <Form>
-        <Form.Item className="form-item" {...formItemLayout} label="角色编码">
+        <Form.Item {...formItemLayout} label="角色编码">
           {getFieldDecorator('roleCode', {
             initialValue: record.roleCode,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),
@@ -65,7 +65,7 @@ const RoleModal = props => {
           })(<Input disabled={!!record.id} placeholder="请输入角色编码" />)}
         </Form.Item>
 
-        <Form.Item className="form-item" {...formItemLayout} label="角色名称">
+        <Form.Item {...formItemLayout} label="角色名称">
           {getFieldDecorator('roleName', {
             initialValue: record.roleName,
             getValueFromEvent: event => event.target.value.replace(/^\s+|\s+$/gm, ''),

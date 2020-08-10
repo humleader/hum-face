@@ -9,7 +9,7 @@ import HumBreadcrumb from 'components/hum-breadcrumb'
 import HumQuery from 'components/hum-query'
 import ToolBar from 'components/tool-bar'
 
-import RoleModal from '../components/role-modal'
+import RoleModal from './role-modal'
 
 const QueryList = props => {
   const { role, action, common } = props

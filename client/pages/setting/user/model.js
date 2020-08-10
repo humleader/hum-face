@@ -10,6 +10,10 @@ const initialState = im.fromJS({
   userModal: {
     visible: false,
     record: {}
+  },
+  setRoleModal: {
+    visible: false,
+    record: {}
   }
 })
 
@@ -23,6 +27,14 @@ export default {
     },
     hideUserModal: (state, payload) => {
       return state.update('userModal', modal => modal.set('visible', false))
+    },
+    showSetRoleModal: (state, payload = {}) => {
+      return state.update('setRoleModal', modal =>
+        modal.set('visible', true).set('record', im.fromJS(payload))
+      )
+    },
+    hideSetRoleModal: (state, payload) => {
+      return state.update('setRoleModal', modal => modal.set('visible', false))
     },
     listSource: (state, payload) => {
       return state.set('listSource', im.fromJS(payload))

@@ -9,13 +9,15 @@ import HumBreadcrumb from 'components/hum-breadcrumb'
 import HumQuery from 'components/hum-query'
 import ToolBar from 'components/tool-bar'
 
-import UserModal from '../components/user-modal'
+import UserModal from './user-modal'
+import SetRoleModal from './set-role-modal'
 
 const QueryList = props => {
   const { user, action, common } = props
   const listSource = user.get('listSource').toJS()
   const params = user.get('params').toJS()
   const userModal = user.get('userModal').toJS()
+  const setRoleModal = user.get('setRoleModal').toJS()
   const userList = common.get('userList').toJS()
 
   const [backParams, setBackParams] = useState({})
@@ -90,7 +92,7 @@ const QueryList = props => {
     {
       title: '操作',
       key: 'action',
-      width: '130px',
+      width: '190px',
       render: (text, record) => {
         return (
           <div>
@@ -101,6 +103,15 @@ const QueryList = props => {
               }}
             >
               编辑
+            </a>
+            <Divider type="vertical" />
+            <a
+              onClick={e => {
+                e.stopPropagation()
+                action.showSetRoleModal(record)
+              }}
+            >
+              配置角色
             </a>
             <Divider type="vertical" />
             <Popconfirm
@@ -203,6 +214,7 @@ const QueryList = props => {
         />
       </HumContainer>
       <UserModal modal={userModal} action={action} params={backParams} />
+      <SetRoleModal modal={setRoleModal} action={action} params={backParams} />
     </div>
   )
 }
