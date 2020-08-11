@@ -11,6 +11,7 @@ const initialState = im.fromJS({
     visible: false,
     record: {}
   },
+  roleList: [],
   setRoleModal: {
     visible: false,
     record: {}
@@ -39,6 +40,9 @@ export default {
     listSource: (state, payload) => {
       return state.set('listSource', im.fromJS(payload))
     },
+    setRoleList: (state, payload) => {
+      return state.set('roleList', im.fromJS(payload))
+    },
     setParams: (state, payload) => {
       return state.set('params', im.fromJS(payload))
     }
@@ -49,8 +53,16 @@ export default {
       this.listSource(data)
       return data
     },
+    async getRoleList(params, rootState) {
+      const data = await axios.get('/role/list', { params })
+      this.setRoleList(data)
+      return data
+    },
     userUpsert(data, rootState) {
       return axios.post('/user/upsert', { ...data })
+    },
+    userSetRole(data, rootState) {
+      return axios.post('/user/setrole', { ...data })
     },
     userDelete(data, rootState) {
       return axios.post('/user/delete', { ...data })

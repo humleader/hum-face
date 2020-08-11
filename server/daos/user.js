@@ -2,10 +2,18 @@ const UserService = require('services/user')
 const userService = new UserService()
 module.exports = class {
   async findAndCountAll(params) {
+    const { UserRole } = global.M
     const { where, pageIndex = 1, pageSize = 20, ...rest } = params
 
     const { count, rows } = await userService.findAndCountAll({
       where,
+      include: [
+        {
+          model: UserRole,
+          as: 'UserRole',
+          required: false
+        }
+      ],
       limit: +pageSize,
       offset: (+pageIndex - 1) * +pageSize,
       ...rest

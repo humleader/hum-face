@@ -17,6 +17,7 @@ const QueryList = props => {
   const listSource = user.get('listSource').toJS()
   const params = user.get('params').toJS()
   const userModal = user.get('userModal').toJS()
+  const roleList = user.get('roleList').toJS()
   const setRoleModal = user.get('setRoleModal').toJS()
   const userList = common.get('userList').toJS()
 
@@ -214,7 +215,7 @@ const QueryList = props => {
         />
       </HumContainer>
       <UserModal modal={userModal} action={action} params={backParams} />
-      <SetRoleModal modal={setRoleModal} action={action} params={backParams} />
+      <SetRoleModal modal={{ roleList, ...setRoleModal }} action={action} params={backParams} />
     </div>
   )
 }

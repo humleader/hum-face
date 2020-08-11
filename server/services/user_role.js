@@ -18,6 +18,12 @@ module.exports = class {
     return UserRole.findAll(params)
   }
 
+  // 批量创建
+  bulkCreate(params, options = {}) {
+    const { UserRole } = global.M
+    return UserRole.bulkCreate(params, options)
+  }
+
   create(params, options = {}) {
     const { UserRole } = global.M
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Modal, message, Form, Select } from 'antd'
 
 import './index.less'
@@ -14,12 +14,32 @@ const UserModal = props => {
   const { action, form, modal, params } = props
 
   const { getFieldDecorator, validateFields } = form
-  const { visible, record } = modal
+  const { visible, record, roleList } = modal
 
   const [loading, setLoading] = useState(false)
 
+  useEffect(() => {
+    if (visible) {
+      action.getRoleList()
+    }
+    return () => {}
+  }, [visible])
+
   const close = () => {
     action.hideSetRoleModal()
+  }
+
+  const renderOptions = options => {
+    return (
+      options &&
+      options.map((item, idx) => {
+        return (
+          <Option key={item.id} item={item} value={item.id}>
+            {item.roleName}
+          </Option>
+        )
+      })
+    )
   }
 
   const onSubmit = () => {
@@ -27,9 +47,9 @@ const UserModal = props => {
     validateFields((errors, values) => {
       if (!errors) {
         action
-          .userUpsert({ ...record, ...values })
+          .userSetRole({ id: record.id, UserRole: record.UserRole, ...values })
           .then(() => {
-            message.success(record.id ? '修改成功！' : '配置成功！')
+            message.success('配置成功！')
             close()
             action.query(params)
             setLoading(false)
@@ -58,13 +78,12 @@ const UserModal = props => {
     >
       <Form>
         <Form.Item {...formItemLayout} label="角色">
-          {getFieldDecorator('userSex', {
-            initialValue: record.userSex,
-            rules: [{ required: true, message: '请选择性别' }]
+          {getFieldDecorator('roles', {
+            initialValue: record.UserRole && record.UserRole.map(res => res.roleId),
+            rules: [{ required: true, message: '请选择角色' }]
           })(
-            <Select placeholder="选择性别" allowClear>
-              <Option value="0">男</Option>
-              <Option value="1">女</Option>
+            <Select mode="multiple" placeholder="选择角色" allowClear>
+              {renderOptions(roleList)}
             </Select>
           )}
         </Form.Item>
