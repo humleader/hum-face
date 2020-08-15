@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Button } from 'antd'
+import { Button, Divider } from 'antd'
 
 import './index.less'
 
@@ -57,7 +57,7 @@ const QueryList = props => {
     {
       title: '操作',
       key: 'action',
-      width: '80px',
+      width: '130px',
       render: (text, record) => {
         return (
           <div>
@@ -68,6 +68,15 @@ const QueryList = props => {
               }}
             >
               编辑
+            </a>
+            <Divider type="vertical" />
+            <a
+              onClick={e => {
+                e.stopPropagation()
+                action.showRoleModal(record)
+              }}
+            >
+              设置权限
             </a>
           </div>
         )
