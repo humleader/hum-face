@@ -33,7 +33,7 @@
     "axios": "^0.19.2",
     "qs": "^6.5.1",
     "bluebird": "^3.7.2",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "crypto-js": "^4.0.0",
     "moment": "^2.15.1",
     "@rematch/core": "^1.0.6",
