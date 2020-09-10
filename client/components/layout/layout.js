@@ -60,10 +60,8 @@ const AntdLayout = props => {
 }
 
 function mapStateToProps(state) {
-  const common = state.common
-  return {
-    common
-  }
+  // const common = state.common
+  return {}
 }
 
 function mapDispatchToProps(dispatch) {

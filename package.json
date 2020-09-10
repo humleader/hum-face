@@ -13,7 +13,7 @@
     "lint-staged": "lint-staged",
     "test": "jest --forceExit",
     "release": "standard-version",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
     "check": "npm-check --update --skip-unused",
     "precommit": "lint-staged",
     "build": "cross-env NODE_ENV=production node scripts/compile.js",
