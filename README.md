@@ -10,6 +10,7 @@
 ### 本地开发
 
 ```bash
+npm install -g commitizen
 npm i
 npm start
 ```
