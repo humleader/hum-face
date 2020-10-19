@@ -1,8 +1,8 @@
 const SequelizeAuto = require('sequelize-auto')
 const auto = new SequelizeAuto(
-  'hum', // 数据库的库名
-  'root', // mysql数据库的用户名
-  'Anthony1021', // mysql数据库的密码
+  'xxx', // 数据库的库名
+  'xxx', // mysql数据库的用户名
+  'xxx', // mysql数据库的密码
   {
     host: '127.0.0.1', // 数据库服务器ip
     dialect: 'mysql',
